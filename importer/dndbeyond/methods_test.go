@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"imetatroll.com/character/lib/base"
+	"imetatroll.com/character.git/lib/base"
 )
 
 func ReadCharacter(t *testing.T) *base.Character {

@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"time"
 
-	"imetatroll.com/character/lib/base"
-	"imetatroll.com/character/lib/dnd"
+	"imetatroll.com/character.git/lib/base"
+	"imetatroll.com/character.git/lib/dnd"
 )
 
 func NewBeyondCharacter(data string) (*Character, error) {

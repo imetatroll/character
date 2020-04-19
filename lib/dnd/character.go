@@ -1,7 +1,7 @@
 package dnd
 
 import (
-	"imetatroll.com/character/lib/base"
+	"imetatroll.com/character.git/lib/base"
 
 	"sort"
 	"strconv"
