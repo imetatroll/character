@@ -8,30 +8,6 @@ import (
 	"imetatroll.com/character.git/lib/dnd"
 )
 
-func GetAlignment(id int) string {
-	switch id {
-	case 1:
-		return "Lawful Good"
-	case 2:
-		return "Neutral Good"
-	case 3:
-		return "Chaotic Good"
-	case 4:
-		return "Lawful Neutral"
-	case 5:
-		return "True Neutral"
-	case 6:
-		return "Chaotic Neutral"
-	case 7:
-		return "Lawful Evil"
-	case 8:
-		return "Neutral Evil"
-	case 9:
-		return "Chaotic Evil"
-	}
-	return ""
-}
-
 func (char *Character) Transfer(userID string) *base.Character {
 	now := time.Now().Unix()
 
@@ -43,12 +19,25 @@ func (char *Character) Transfer(userID string) *base.Character {
 		target.Top.Set("Inspiration", "false", now)
 	}
 
+	// top
+
+	// 2do: class dice/count
 	target.Top.Set("CharacterName", char.Character.Name, now)
 	target.Top.Set("Race", char.Character.Race.FullName, now) // or BaseName
 	target.Top.Set("Background", char.Character.Background.Definition.Name, now)
 	target.Top.Set("Class", char.Character.Classes[0].Definition.Name, now)
-	target.Top.Set("Alignment", GetAlignment(char.Character.AlignmentID), now)
+	target.Top.Set("Alignment", char.GetAlignment(), now)
 	target.Top.Set("XP", strconv.Itoa(char.Character.CurrentXp), now)
+	target.Top.Set("Level", strconv.Itoa(char.Character.Classes[0].Level), now)
+
+	target.Top.Set("Strength", char.GetAbility("Strength"), now)
+	target.Top.Set("Dexterity", char.GetAbility("Dexterity"), now)
+	target.Top.Set("Constitution", char.GetAbility("Constitution"), now)
+	target.Top.Set("Intelligence", char.GetAbility("Intelligence"), now)
+	target.Top.Set("Wisdom", char.GetAbility("Wisdom"), now)
+	target.Top.Set("Charisma", char.GetAbility("Charisma"), now)
+
+	// bio
 
 	return target
 }
@@ -77,26 +66,62 @@ func (char *Character) GetSkill(name string) int64 {
 }
 */
 
-func (char *Character) GetAbility(name string) int64 {
-	id := -1
-	switch name {
-	case "str":
-		id = 1
-	case "dex":
-		id = 2
-	case "con":
-		id = 3
-	case "int":
-		id = 4
-	case "wis":
-		id = 5
-	case "cha":
-		id = 6
-	}
-	for _, stat := range char.Character.Stats {
-		if stat.ID == id {
-			return int64(stat.Value)
+func (char *Character) GetRacialStatModifier(id int, name string) int {
+	// EG "friendlySubtypeName": "Wisdom Score",
+	//    "friendlySubtypeName": "Constitution Score",
+	for _, mod := range char.Character.Modifiers.Race {
+		if mod.Type == "bonus" && mod.FriendlySubtypeName == name+" Score" {
+			return mod.Value
 		}
 	}
 	return 0
+}
+
+func (char *Character) GetAbility(name string) string {
+	id := -1
+	switch name {
+	case "Strength":
+		id = 1
+	case "Dexterity":
+		id = 2
+	case "Constitution":
+		id = 3
+	case "Intelligence":
+		id = 4
+	case "Wisdom":
+		id = 5
+	case "Charisma":
+		id = 6
+	}
+	bonus := char.GetRacialStatModifier(id, name)
+	for _, stat := range char.Character.Stats {
+		if stat.ID == id {
+			return strconv.Itoa(stat.Value + bonus)
+		}
+	}
+	return "0"
+}
+
+func (char *Character) GetAlignment() string {
+	switch char.Character.AlignmentID {
+	case 1:
+		return "Lawful Good"
+	case 2:
+		return "Neutral Good"
+	case 3:
+		return "Chaotic Good"
+	case 4:
+		return "Lawful Neutral"
+	case 5:
+		return "True Neutral"
+	case 6:
+		return "Chaotic Neutral"
+	case 7:
+		return "Lawful Evil"
+	case 8:
+		return "Neutral Evil"
+	case 9:
+		return "Chaotic Evil"
+	}
+	return ""
 }

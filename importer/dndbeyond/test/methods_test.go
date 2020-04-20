@@ -97,6 +97,19 @@ func TestXP(t *testing.T) {
 	}
 }
 
+func TestLevel(t *testing.T) {
+	character := ReadCharacter(t)
+
+	expect := "3"
+	race, ts := character.Top.Get("Level")
+	if race != expect {
+		t.Fatalf("expecting '%s' but got '%s'", expect, race)
+	}
+	if ts == 0 {
+		t.Fatal("expecting non-zero timestamp")
+	}
+}
+
 func TestInspiration(t *testing.T) {
 	character := ReadCharacter(t)
 
@@ -107,5 +120,27 @@ func TestInspiration(t *testing.T) {
 	}
 	if ts == 0 {
 		t.Fatal("expecting non-zero timestamp")
+	}
+}
+
+func TestAbilities(t *testing.T) {
+	character := ReadCharacter(t)
+
+	abilities := [][]string{
+		[]string{"Strength", "14"},
+		[]string{"Dexterity", "12"},
+		[]string{"Constitution", "10"},
+		[]string{"Intelligence", "3"},
+		[]string{"Wisdom", "13"},
+		[]string{"Charisma", "11"},
+	}
+	for _, ability := range abilities {
+		val, ts := character.Top.Get(ability[0])
+		if val != ability[1] {
+			t.Fatalf("%s expecting '%s' but got '%s'", ability[0], ability[1], val)
+		}
+		if ts == 0 {
+			t.Fatal("expecting non-zero timestamp")
+		}
 	}
 }
