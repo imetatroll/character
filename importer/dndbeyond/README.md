@@ -6,6 +6,7 @@ the imetatroll.com 5ESRD system.
 ### Go to your character in DND Beyond
 
 - Login to dnd beyond.
+- Fill out everything that you possibly can.
 - Go to the characters page.
 - Select your character.
 
@@ -30,10 +31,8 @@ https://www.dndbeyond.com/profile/<username>/characters/<id>/json
 - Reformat the character sheet in order to more easily inspect the values.
 
 ```
-python3 -m json.tool < character.json > exported.json
+python3 -m json.tool < character.json > pretty_printed.json
 ```
-
-Note: 'exported.json' is read by the unit tests.
 
 ### character.go changes
 
@@ -47,3 +46,7 @@ Note: 'exported.json' is read by the unit tests.
 EG an int -> interface{} change would be a regression.
 
 - Rearrangements of internal structure must be dealt with by updating the methods.go file.
+
+### Testing
+
+Located under the folder '/test'.

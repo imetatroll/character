@@ -1,7 +1,6 @@
 package beyond
 
 import (
-	"encoding/json"
 	"strconv"
 	"time"
 
@@ -9,12 +8,28 @@ import (
 	"imetatroll.com/character.git/lib/dnd"
 )
 
-func NewBeyondCharacter(data string) (*Character, error) {
-	char := &Character{}
-	if err := json.Unmarshal([]byte(data), char); err != nil {
-		return char, err
+func GetAlignment(id int) string {
+	switch id {
+	case 1:
+		return "Lawful Good"
+	case 2:
+		return "Neutral Good"
+	case 3:
+		return "Chaotic Good"
+	case 4:
+		return "Lawful Neutral"
+	case 5:
+		return "True Neutral"
+	case 6:
+		return "Chaotic Neutral"
+	case 7:
+		return "Lawful Evil"
+	case 8:
+		return "Neutral Evil"
+	case 9:
+		return "Chaotic Evil"
 	}
-	return char, nil
+	return ""
 }
 
 func (char *Character) Transfer(userID string) *base.Character {
@@ -30,6 +45,9 @@ func (char *Character) Transfer(userID string) *base.Character {
 
 	target.Top.Set("CharacterName", char.Character.Name, now)
 	target.Top.Set("Race", char.Character.Race.FullName, now) // or BaseName
+	target.Top.Set("Background", char.Character.Background.Definition.Name, now)
+	target.Top.Set("Class", char.Character.Classes[0].Definition.Name, now)
+	target.Top.Set("Alignment", GetAlignment(char.Character.AlignmentID), now)
 	target.Top.Set("XP", strconv.Itoa(char.Character.CurrentXp), now)
 
 	return target
