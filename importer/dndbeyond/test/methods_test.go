@@ -144,3 +144,59 @@ func TestAbilities(t *testing.T) {
 		}
 	}
 }
+
+func TestSavingThrows(t *testing.T) {
+	character := ReadCharacter(t)
+
+	saves := [][]string{
+		[]string{"StrengthSaveCheck", "false"},
+		[]string{"DexteritySaveCheck", "false"},
+		[]string{"ConstitutionSaveCheck", "true"},
+		[]string{"IntelligenceSaveCheck", "false"},
+		[]string{"WisdomSaveCheck", "false"},
+		[]string{"CharismaSaveCheck", "true"},
+	}
+	for _, save := range saves {
+		val, ts := character.Top.Get(save[0])
+		if val != save[1] {
+			t.Fatalf("%s expecting '%s' but got '%s'", save[0], save[1], val)
+		}
+		if ts == 0 {
+			t.Fatal("expecting non-zero timestamp")
+		}
+	}
+}
+
+func TestSkills(t *testing.T) {
+	character := ReadCharacter(t)
+
+	skills := [][]string{
+		[]string{"AcrobaticsCheck", "false"},
+		[]string{"InsightCheck", "true"},
+		[]string{"PerformanceCheck", "false"},
+		[]string{"AnimalHandlingCheck", "false"},
+		[]string{"IntimidationCheck", "false"},
+		[]string{"PersuasionCheck", "true"},
+		[]string{"ArcanaCheck", "false"},
+		[]string{"InvestigationCheck", "false"},
+		[]string{"ReligionCheck", "false"},
+		[]string{"AthleticsCheck", "false"},
+		[]string{"MedicineCheck", "false"},
+		[]string{"SleightOfHandCheck", "false"},
+		[]string{"DeceptionCheck", "true"},
+		[]string{"NatureCheck", "false"},
+		[]string{"StealthCheck", "false"},
+		[]string{"HistoryCheck", "true"},
+		[]string{"PerceptionCheck", "false"},
+		[]string{"SurvivalCheck", "false"},
+	}
+	for _, skill := range skills {
+		val, ts := character.Top.Get(skill[0])
+		if val != skill[1] {
+			t.Fatalf("%s expecting '%s' but got '%s'", skill[0], skill[1], val)
+		}
+		if ts == 0 {
+			t.Fatal("expecting non-zero timestamp")
+		}
+	}
+}
