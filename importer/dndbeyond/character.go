@@ -213,15 +213,37 @@ type Character struct {
 		} `json:"preferences"`
 		Lifestyle interface{} `json:"lifestyle"`
 		Inventory []struct {
-			ID           int `json:"id"`
-			EntityTypeID int `json:"entityTypeId"`
-			Definition   struct {
-				BaseItemID            int           `json:"baseItemId"`
-				BaseArmorName         string        `json:"baseArmorName"`
-				StrengthRequirement   int           `json:"strengthRequirement"`
-				ArmorClass            int           `json:"armorClass"`
-				StealthCheck          int           `json:"stealthCheck"`
-				ArmorTypeID           int           `json:"armorTypeId"`
+			DisplayAsAttack interface{} `json:"displayAsAttack"`
+			ID              int         `json:"id"`
+			EntityTypeID    int         `json:"entityTypeId"`
+			Definition      struct {
+				BaseItemID          int    `json:"baseItemId"`
+				BaseArmorName       string `json:"baseArmorName"`
+				StrengthRequirement int    `json:"strengthRequirement"`
+				ArmorClass          int    `json:"armorClass"`
+				StealthCheck        int    `json:"stealthCheck"`
+				ArmorTypeID         int    `json:"armorTypeId"`
+				Damage              struct {
+					DiceCount      int         `json:"diceCount"`
+					DiceValue      int         `json:"diceValue"`
+					DiceMultiplier interface{} `json:"diceMultiplier"`
+					FixedValue     interface{} `json:"fixedValue"`
+					DiceString     string      `json:"diceString"`
+				} `json:"damage"`
+				DamageType  string      `json:"damageType"`
+				FixedDamage interface{} `json:"fixedDamage"`
+				Properties  []struct {
+					ID          int    `json:"id"`
+					Name        string `json:"name"`
+					Description string `json:"description"`
+					Notes       string `json:"notes"`
+				} `json:"properties"`
+				AttackType            int           `json:"attackType"`
+				CategoryID            int           `json:"categoryId"`
+				Range                 int           `json:"range"`
+				LongRange             int           `json:"longRange"`
+				IsMonkWeapon          bool          `json:"isMonkWeapon"`
+				WeaponBehaviors       []interface{} `json:"weaponBehaviors"`
 				ID                    int           `json:"id"`
 				BaseTypeID            int           `json:"baseTypeId"`
 				EntityTypeID          int           `json:"entityTypeId"`
@@ -252,11 +274,10 @@ type Character struct {
 				Tags                  []string      `json:"tags"`
 				GrantedModifiers      []interface{} `json:"grantedModifiers"`
 			} `json:"definition"`
-			Quantity        int         `json:"quantity"`
-			IsAttuned       bool        `json:"isAttuned"`
-			Equipped        bool        `json:"equipped"`
-			LimitedUse      interface{} `json:"limitedUse"`
-			DisplayAsAttack interface{} `json:"displayAsAttack,omitempty"`
+			Quantity   int         `json:"quantity"`
+			IsAttuned  bool        `json:"isAttuned"`
+			Equipped   bool        `json:"equipped"`
+			LimitedUse interface{} `json:"limitedUse"`
 		} `json:"inventory"`
 		Currencies struct {
 			Cp int `json:"cp"`
