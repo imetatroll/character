@@ -63,6 +63,34 @@ func (char *Character) GetInventory(now int64) []dnd.CharacterItem {
 	return items
 }
 
+func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
+	weapons := []dnd.CharacterWeapon{}
+	for index, item := range char.Character.Inventory {
+		if item.Definition.FilterType == "Weapon" {
+			weapon := dnd.CharacterWeapon{
+				UUID: base.CharacterField{
+					Val: strconv.Itoa(index),
+					TS:  now,
+				},
+				Name: base.CharacterField{
+					Val: item.Definition.Name,
+					TS:  now,
+				},
+				Properties: base.CharacterField{
+					Val: FilterP(item.Definition.Description),
+					TS:  now,
+				},
+				Weight: base.CharacterField{
+					Val: strconv.FormatFloat(item.Definition.Weight, 'f', 1, 64),
+					TS:  now,
+				},
+			}
+			weapons = append(weapons, weapon)
+		}
+	}
+	return weapons
+}
+
 func (char *Character) GetNotes() string {
 	notes := strings.TrimSpace(char.Character.Notes.Organizations)
 	if len(notes) > 0 {

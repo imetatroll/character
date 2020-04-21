@@ -34,6 +34,21 @@ https://www.dndbeyond.com/profile/<username>/characters/<id>/json
 python3 -m json.tool < character.json > pretty_printed.json
 ```
 
+### Remove unused elements
+
+Remove the following portions of the downloaded json file:
+
+```
+"characterConfiguration": {
+  "startingEquipmentType": null,
+  "abilityScoreType": 2,
+  "showHelpText": false
+},
+"characterData": {
+...
+}
+```
+
 ### character.go changes
 
 - Use https://transform.tools/json-to-go to generated a new struct
