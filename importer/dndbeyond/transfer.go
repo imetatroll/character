@@ -92,6 +92,19 @@ func (char *Character) Transfer(userID string) *base.Character {
 	}
 
 	// weapons
+	weapons := char.GetWeapons(now)
+	for index, weapon := range weapons {
+		id := "Weapons.Name." + strconv.Itoa(index)
+		target.Combat.Set(id, weapon.Name.Val, weapon.Name.TS)
+		id = "Weapons.Properties." + strconv.Itoa(index)
+		target.Combat.Set(id, weapon.Properties.Val, weapon.Properties.TS)
+		id = "Weapons.DamageRoll." + strconv.Itoa(index)
+		target.Combat.Set(id, weapon.DamageRoll.Val, weapon.Weight.TS)
+		id = "Weapons.DamageDice." + strconv.Itoa(index)
+		target.Combat.Set(id, weapon.DamageDice.Val, weapon.Weight.TS)
+		id = "Weapons.Weight." + strconv.Itoa(index)
+		target.Combat.Set(id, weapon.Weight.Val, weapon.Weight.TS)
+	}
 
 	// armor
 

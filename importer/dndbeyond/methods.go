@@ -69,12 +69,15 @@ func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
 		if item.Definition.FilterType == "Weapon" {
 			/*
 				Critical         base.CharacterField
-				DamageRoll       base.CharacterField
-				DamageDice       base.CharacterField
 				AdditionalDamage base.CharacterField
 				Ability          base.CharacterField
 			*/
-
+			properties := ""
+			for _, prop := range item.Definition.Properties {
+				properties += strings.TrimSpace(prop.Name) + "\n"
+				properties += strings.TrimSpace(prop.Description) + "\n"
+				properties += strings.TrimSpace(prop.Notes) + "\n"
+			}
 			weapon := dnd.CharacterWeapon{
 				UUID: base.CharacterField{
 					Val: strconv.Itoa(index),
@@ -85,7 +88,15 @@ func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
 					TS:  now,
 				},
 				Properties: base.CharacterField{
-					Val: FilterP(item.Definition.Description),
+					Val: properties,
+					TS:  now,
+				},
+				DamageRoll: base.CharacterField{
+					Val: strconv.Itoa(item.Definition.Damage.DiceCount),
+					TS:  now,
+				},
+				DamageDice: base.CharacterField{
+					Val: strconv.Itoa(item.Definition.Damage.DiceValue),
 					TS:  now,
 				},
 				Weight: base.CharacterField{

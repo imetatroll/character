@@ -284,6 +284,37 @@ func TestItems(t *testing.T) {
 	}
 }
 
+func TestWeapons(t *testing.T) {
+	character := ReadCharacter(t)
+
+	props := `Versatile
+This weapon can be used with one or two hands. A damage value in parentheses appears with the property--the damage when the weapon is used with two hands to make a melee attack.
+1d10
+`
+
+	length := character.Combat.Length("Weapons")
+	if length != 1 {
+		t.Fatalf("expecting 1 item but got %d items", length)
+	}
+	for index := 0; index < length; index++ {
+		id := "Weapons.Name." + strconv.Itoa(index)
+		val, _ := character.Combat.Get(id)
+		if val != "Battleaxe" {
+			t.Fatalf("expecting 'Battleaxe' but got '%s'", val)
+		}
+		id = "Weapons.Properties." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != props {
+			t.Fatalf("expecting '%s' but got '%s'", props, val)
+		}
+		id = "Weapons.Weight." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "4.0" {
+			t.Fatalf("expecting '4.0' but got '%s'", val)
+		}
+	}
+}
+
 func TestFilterP(t *testing.T) {
 	val := "<p>Rope,&nbsp;has 2 hit points</p>\n<p>17 Strength check</p>"
 	val = beyond.FilterP(val)
