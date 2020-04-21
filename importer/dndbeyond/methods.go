@@ -2,7 +2,90 @@ package beyond
 
 import (
 	"strconv"
+	"strings"
+
+	"imetatroll.com/character.git/lib/base"
+	"imetatroll.com/character.git/lib/dnd"
 )
+
+var NonItems = []string{"Armor", "Weapon", "Wand"}
+
+func IsNonItem(filterType string) bool {
+	for _, non := range NonItems {
+		if filterType == non {
+			return true
+		}
+	}
+	return false
+}
+
+func FilterP(val string) string {
+	filtered := make([]byte, 0, len(val))
+	for i := 0; i < len(val); i++ {
+		if val[i] == '<' && i+2 < len(val) && val[i+1] == 'p' && val[i+2] == '>' {
+			i += 2
+			continue
+		}
+		if val[i] == '<' && i+3 < len(val) && val[i+1] == '/' && val[i+2] == 'p' && val[i+3] == '>' {
+			i += 3
+			continue
+		}
+		filtered = append(filtered, val[i])
+	}
+	return string(filtered)
+}
+
+func (char *Character) GetInventory(now int64) []dnd.CharacterItem {
+	items := []dnd.CharacterItem{}
+	for index, item := range char.Character.Inventory {
+		if !IsNonItem(item.Definition.FilterType) {
+			item := dnd.CharacterItem{
+				UUID: base.CharacterField{
+					Val: strconv.Itoa(index),
+					TS:  now,
+				},
+				Name: base.CharacterField{
+					Val: item.Definition.Name,
+					TS:  now,
+				},
+				Properties: base.CharacterField{
+					Val: FilterP(item.Definition.Description),
+					TS:  now,
+				},
+				Weight: base.CharacterField{
+					Val: strconv.FormatFloat(item.Definition.Weight, 'f', 1, 64),
+					TS:  now,
+				},
+			}
+			items = append(items, item)
+		}
+	}
+	return items
+}
+
+func (char *Character) GetNotes() string {
+	notes := strings.TrimSpace(char.Character.Notes.Organizations)
+	if len(notes) > 0 {
+		notes += "\n\n"
+	}
+	val := strings.TrimSpace(char.Character.Notes.Allies)
+	if len(val) > 0 {
+		notes += val + "\n\n"
+	}
+	val = strings.TrimSpace(char.Character.Notes.Enemies)
+	if len(val) > 0 {
+		notes += val + "\n\n"
+	}
+	val = strings.TrimSpace(char.Character.Notes.Backstory)
+	if len(val) > 0 {
+		notes += val + "\n\n"
+	}
+	val = strings.TrimSpace(char.Character.Notes.OtherNotes)
+	if len(val) > 0 {
+		notes += val + "\n\n"
+	}
+	return notes
+}
 
 func (char *Character) GetProficiency(name string) string {
 	if char.GetRaceProficiency(name) == "true" {

@@ -2,8 +2,10 @@ package beyondtest
 
 import (
 	"io/ioutil"
+	"strconv"
 	"testing"
 
+	"imetatroll.com/character.git/importer/dndbeyond"
 	"imetatroll.com/character.git/lib/base"
 )
 
@@ -198,5 +200,94 @@ func TestSkills(t *testing.T) {
 		if ts == 0 {
 			t.Fatal("expecting non-zero timestamp")
 		}
+	}
+}
+
+func TestBio(t *testing.T) {
+	character := ReadCharacter(t)
+
+	notes := `Organizations
+
+Allies
+
+Enemies
+
+Backstory Here
+
+Other Information
+
+`
+
+	entries := [][]string{
+		[]string{"Personality", "Despite my noble birth, I do not place myself above other folk. We all have the same blood."},
+		[]string{"Ideals", "Power. If I can attain more power, no one will tell me what to do. (Evil)"},
+		[]string{"Bonds", "I am in love with the heir of a family that my family despises."},
+		[]string{"Flaws", "I hide a truly scandalous secret that could ruin my family forever."},
+		[]string{"Features", "The way I look."},
+		[]string{"Notes", notes},
+	}
+	for _, entry := range entries {
+		val, ts := character.Bio.Get(entry[0])
+		if val != entry[1] {
+			t.Fatalf("%s expecting '%s' but got '%s'", entry[0], entry[1], val)
+		}
+		if ts == 0 {
+			t.Fatal("expecting non-zero timestamp")
+		}
+	}
+}
+
+func TestCurrencies(t *testing.T) {
+	character := ReadCharacter(t)
+
+	currencies := [][]string{
+		[]string{"Copper", "5"},
+		[]string{"Silver", "4"},
+		[]string{"Electrum", "3"},
+		[]string{"Gold", "2"},
+		[]string{"Platinum", "1"},
+	}
+	for _, currency := range currencies {
+		val, ts := character.Items.Get(currency[0])
+		if val != currency[1] {
+			t.Fatalf("%s expecting '%s' but got '%s'", currency[0], currency[1], val)
+		}
+		if ts == 0 {
+			t.Fatal("expecting non-zero timestamp")
+		}
+	}
+}
+
+func TestItems(t *testing.T) {
+	character := ReadCharacter(t)
+
+	length := character.Items.Length("Items")
+	if length != 1 {
+		t.Fatalf("expecting 1 item but got %d items", length)
+	}
+	for index := 0; index < length; index++ {
+		id := "Items.Name." + strconv.Itoa(index)
+		val, _ := character.Items.Get(id)
+		if val != "Rope, Hempen (50 feet)" {
+			t.Fatalf("expecting 'Rope, Hempen (50 feet)' but got '%s'", val)
+		}
+		id = "Items.Properties." + strconv.Itoa(index)
+		val, _ = character.Items.Get(id)
+		if val != "Rope,&nbsp;has 2 hit points and can be burst with a DC 17 Strength check." {
+			t.Fatalf("expecting 'Rope,&nbsp;has 2 hit points and can be burst with a DC 17 Strength check.' but got '%s'", val)
+		}
+		id = "Items.Weight." + strconv.Itoa(index)
+		val, _ = character.Items.Get(id)
+		if val != "10.0" {
+			t.Fatalf("expecting '10.0' but got '%s'", val)
+		}
+	}
+}
+
+func TestFilterP(t *testing.T) {
+	val := "<p>Rope,&nbsp;has 2 hit points</p>\n<p>17 Strength check</p>"
+	val = beyond.FilterP(val)
+	if val != "Rope,&nbsp;has 2 hit points\n17 Strength check" {
+		t.Fatalf("expected 'Rope,&nbsp;has 2 hit points\n17 Strength check' but got '%s'", val)
 	}
 }

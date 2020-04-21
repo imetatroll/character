@@ -183,7 +183,7 @@ type Character struct {
 			PersonalPossessions string      `json:"personalPossessions"`
 			OtherHoldings       interface{} `json:"otherHoldings"`
 			Organizations       string      `json:"organizations"`
-			Enemies             interface{} `json:"enemies"`
+			Enemies             string      `json:"enemies"`
 			Backstory           string      `json:"backstory"`
 			OtherNotes          string      `json:"otherNotes"`
 		} `json:"notes"`

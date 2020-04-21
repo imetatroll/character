@@ -617,7 +617,7 @@
       "personalPossessions": "Other Possessions",
       "otherHoldings": null,
       "organizations": "Organizations",
-      "enemies": null,
+      "enemies": "Enemies\n",
       "backstory": "Backstory Here\n",
       "otherNotes": "Other Information\n"
     },
@@ -763,6 +763,53 @@
       },
       {
         "displayAsAttack": null,
+        "id": 278314851,
+        "entityTypeId": 1439493548,
+        "definition": {
+          "subType": "Adventuring Gear",
+          "isConsumable": false,
+          "gearTypeId": 1,
+          "weaponBehaviors": [],
+          "id": 77,
+          "baseTypeId": 2103445194,
+          "entityTypeId": 2103445194,
+          "canEquip": false,
+          "magic": false,
+          "name": "Rope, Hempen (50 feet)",
+          "snippet": null,
+          "weight": 10.0,
+          "type": "Gear",
+          "description": "<p>Rope,&nbsp;has 2 hit points and can be burst with a DC 17 Strength check.</p>",
+          "canAttune": false,
+          "attunementDescription": null,
+          "rarity": "Common",
+          "isHomebrew": false,
+          "version": null,
+          "sourceId": null,
+          "sourcePageNumber": null,
+          "stackable": true,
+          "bundleSize": 1,
+          "avatarUrl": null,
+          "largeAvatarUrl": null,
+          "filterType": "Other Gear",
+          "cost": 1.0,
+          "isPack": false,
+          "levelInfusionGranted": null,
+          "canBeAddedToInventory": true,
+          "groupedId": null,
+          "tags": [
+            "Utility",
+            "Exploration"
+          ],
+          "grantedModifiers": []
+        },
+        "quantity": 1,
+        "isAttuned": false,
+        "equipped": false,
+        "limitedUse": null
+      },
+      {
+        "displayAsAttack": null,
         "id": 276076099,
         "entityTypeId": 1439493548,
         "definition": {
@@ -815,11 +862,11 @@
       }
     ],
     "currencies": {
-      "cp": 1,
-      "sp": 2,
-      "gp": 4,
+      "cp": 5,
+      "sp": 4,
+      "gp": 2,
       "ep": 3,
-      "pp": 5
+      "pp": 1
     },
     "classes": [
       {

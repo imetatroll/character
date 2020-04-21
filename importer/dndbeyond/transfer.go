@@ -67,6 +67,35 @@ func (char *Character) Transfer(userID string) *base.Character {
 	target.Top.Set("SurvivalCheck", char.GetProficiency("Survival"), now)
 
 	// bio
+	target.Bio.Set("Personality", char.Character.Traits.PersonalityTraits, now)
+	target.Bio.Set("Ideals", char.Character.Traits.Ideals, now)
+	target.Bio.Set("Bonds", char.Character.Traits.Bonds, now)
+	target.Bio.Set("Flaws", char.Character.Traits.Flaws, now)
+	target.Bio.Set("Features", char.Character.Traits.Appearance, now)
+	target.Bio.Set("Notes", char.GetNotes(), now)
+
+	// items
+	target.Items.Set("Copper", strconv.Itoa(char.Character.Currencies.Cp), now)
+	target.Items.Set("Silver", strconv.Itoa(char.Character.Currencies.Sp), now)
+	target.Items.Set("Electrum", strconv.Itoa(char.Character.Currencies.Ep), now)
+	target.Items.Set("Gold", strconv.Itoa(char.Character.Currencies.Gp), now)
+	target.Items.Set("Platinum", strconv.Itoa(char.Character.Currencies.Pp), now)
+
+	items := char.GetInventory(now)
+	for index, item := range items {
+		id := "Items.Name." + strconv.Itoa(index)
+		target.Items.Set(id, item.Name.Val, item.Name.TS)
+		id = "Items.Properties." + strconv.Itoa(index)
+		target.Items.Set(id, item.Properties.Val, item.Properties.TS)
+		id = "Items.Weight." + strconv.Itoa(index)
+		target.Items.Set(id, item.Weight.Val, item.Weight.TS)
+	}
+
+	// weapons
+
+	// armor
+
+	// spells
 
 	return target
 }
