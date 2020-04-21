@@ -67,6 +67,14 @@ func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
 	weapons := []dnd.CharacterWeapon{}
 	for index, item := range char.Character.Inventory {
 		if item.Definition.FilterType == "Weapon" {
+			/*
+				Critical         base.CharacterField
+				DamageRoll       base.CharacterField
+				DamageDice       base.CharacterField
+				AdditionalDamage base.CharacterField
+				Ability          base.CharacterField
+			*/
+
 			weapon := dnd.CharacterWeapon{
 				UUID: base.CharacterField{
 					Val: strconv.Itoa(index),
@@ -84,6 +92,12 @@ func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
 					Val: strconv.FormatFloat(item.Definition.Weight, 'f', 1, 64),
 					TS:  now,
 				},
+			}
+			if char.GetProficiency(weapon.Name.Val) == "true" {
+				weapon.Proficient = base.CharacterField{
+					Val: "true",
+					TS:  now,
+				}
 			}
 			weapons = append(weapons, weapon)
 		}
