@@ -104,7 +104,7 @@ func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
 					TS:  now,
 				},
 			}
-			if char.GetProficiency(weapon.Name.Val) == "true" {
+			if char.GetProficiency(item.Definition.Name) == "true" {
 				weapon.Proficient = base.CharacterField{
 					Val: "true",
 					TS:  now,
@@ -114,6 +114,65 @@ func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
 		}
 	}
 	return weapons
+}
+
+func (char *Character) GetArmor(now int64) []dnd.CharacterArmor {
+	armors := []dnd.CharacterArmor{}
+	for index, item := range char.Character.Inventory {
+		if item.Definition.FilterType == "Armor" {
+			/*
+				Stealth
+			*/
+			equipped := "false"
+			if item.Equipped {
+				equipped = "true"
+			}
+			stealth := ""
+			if item.Definition.StealthCheck > 1 {
+				stealth = "Disadvantage"
+			}
+			armor := dnd.CharacterArmor{
+				UUID: base.CharacterField{
+					Val: strconv.Itoa(index),
+					TS:  now,
+				},
+				Name: base.CharacterField{
+					Val: item.Definition.Name,
+					TS:  now,
+				},
+				Class: base.CharacterField{
+					Val: strconv.Itoa(item.Definition.ArmorClass),
+					TS:  now,
+				},
+				Strength: base.CharacterField{
+					Val: "Str " + strconv.Itoa(item.Definition.StrengthRequirement),
+					TS:  now,
+				},
+				Stealth: base.CharacterField{
+					Val: stealth,
+					TS:  now,
+				},
+				Properties: base.CharacterField{
+					Val: FilterP(item.Definition.Description),
+					TS:  now,
+				},
+				Type: base.CharacterField{
+					Val: strings.Split(item.Definition.Type, " ")[0],
+					TS:  now,
+				},
+				InUse: base.CharacterField{
+					Val: equipped,
+					TS:  now,
+				},
+				Weight: base.CharacterField{
+					Val: strconv.FormatFloat(item.Definition.Weight, 'f', 1, 64),
+					TS:  now,
+				},
+			}
+			armors = append(armors, armor)
+		}
+	}
+	return armors
 }
 
 func (char *Character) GetNotes() string {

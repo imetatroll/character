@@ -99,11 +99,13 @@ func (char *Character) Transfer(userID string) *base.Character {
 		id = "Weapons.Properties." + strconv.Itoa(index)
 		target.Combat.Set(id, weapon.Properties.Val, weapon.Properties.TS)
 		id = "Weapons.DamageRoll." + strconv.Itoa(index)
-		target.Combat.Set(id, weapon.DamageRoll.Val, weapon.Weight.TS)
+		target.Combat.Set(id, weapon.DamageRoll.Val, weapon.DamageRoll.TS)
 		id = "Weapons.DamageDice." + strconv.Itoa(index)
-		target.Combat.Set(id, weapon.DamageDice.Val, weapon.Weight.TS)
+		target.Combat.Set(id, weapon.DamageDice.Val, weapon.DamageDice.TS)
 		id = "Weapons.Weight." + strconv.Itoa(index)
 		target.Combat.Set(id, weapon.Weight.Val, weapon.Weight.TS)
+		id = "Weapons.Proficient." + strconv.Itoa(index)
+		target.Combat.Set(id, weapon.Proficient.Val, weapon.Proficient.TS)
 	}
 
 	// armor

@@ -312,6 +312,11 @@ This weapon can be used with one or two hands. A damage value in parentheses app
 		if val != "4.0" {
 			t.Fatalf("expecting '4.0' but got '%s'", val)
 		}
+		id = "Weapons.Proficient." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "true" {
+			t.Fatalf("expecting 'true' but got '%s'", val)
+		}
 	}
 }
 
