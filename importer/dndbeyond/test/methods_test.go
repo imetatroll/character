@@ -320,6 +320,57 @@ This weapon can be used with one or two hands. A damage value in parentheses app
 	}
 }
 
+func TestArmor(t *testing.T) {
+	character := ReadCharacter(t)
+
+	length := character.Combat.Length("Armors")
+	if length != 1 {
+		t.Fatalf("expecting 1 item but got %d items", length)
+	}
+	for index := 0; index < length; index++ {
+		id := "Armors.Name." + strconv.Itoa(index)
+		val, _ := character.Combat.Get(id)
+		if val != "Chain Mail" {
+			t.Fatalf("expecting 'Chain Mail' but got '%s'", val)
+		}
+		id = "Armors.Class." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "16" {
+			t.Fatalf("expecting '16' but got '%s'", val)
+		}
+		id = "Armors.Strength." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "Str 13" {
+			t.Fatalf("expecting 'Str 13' but got '%s'", val)
+		}
+		id = "Armors.Stealth." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "Disadvantage" {
+			t.Fatalf("expecting 'Disadvantage' but got '%s'", val)
+		}
+		id = "Armors.Properties." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets." {
+			t.Fatalf("expecting 'Made of ...' but got '%s'", val)
+		}
+		id = "Armors.Type." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "Heavy" {
+			t.Fatalf("expecting 'Heavy' but got '%s'", val)
+		}
+		id = "Armors.InUse." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "true" {
+			t.Fatalf("expecting 'true' but got '%s'", val)
+		}
+		id = "Armors.Weight." + strconv.Itoa(index)
+		val, _ = character.Combat.Get(id)
+		if val != "55.0" {
+			t.Fatalf("expecting '55.0' but got '%s'", val)
+		}
+	}
+}
+
 func TestFilterP(t *testing.T) {
 	val := "<p>Rope,&nbsp;has 2 hit points</p>\n<p>17 Strength check</p>"
 	val = beyond.FilterP(val)

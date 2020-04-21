@@ -120,9 +120,6 @@ func (char *Character) GetArmor(now int64) []dnd.CharacterArmor {
 	armors := []dnd.CharacterArmor{}
 	for index, item := range char.Character.Inventory {
 		if item.Definition.FilterType == "Armor" {
-			/*
-				Stealth
-			*/
 			equipped := "false"
 			if item.Equipped {
 				equipped = "true"

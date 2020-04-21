@@ -109,6 +109,25 @@ func (char *Character) Transfer(userID string) *base.Character {
 	}
 
 	// armor
+	armors := char.GetArmor(now)
+	for index, armor := range armors {
+		id := "Armors.Name." + strconv.Itoa(index)
+		target.Combat.Set(id, armor.Name.Val, armor.Name.TS)
+		id = "Armors.Class." + strconv.Itoa(index)
+		target.Combat.Set(id, armor.Class.Val, armor.Class.TS)
+		id = "Armors.Strength." + strconv.Itoa(index)
+		target.Combat.Set(id, armor.Strength.Val, armor.Strength.TS)
+		id = "Armors.Stealth." + strconv.Itoa(index)
+		target.Combat.Set(id, armor.Stealth.Val, armor.Stealth.TS)
+		id = "Armors.Properties." + strconv.Itoa(index)
+		target.Combat.Set(id, armor.Properties.Val, armor.Properties.TS)
+		id = "Armors.Type." + strconv.Itoa(index)
+		target.Combat.Set(id, armor.Type.Val, armor.Type.TS)
+		id = "Armors.InUse." + strconv.Itoa(index)
+		target.Combat.Set(id, armor.InUse.Val, armor.InUse.TS)
+		id = "Armors.Weight." + strconv.Itoa(index)
+		target.Combat.Set(id, armor.Weight.Val, armor.Weight.TS)
+	}
 
 	// spells
 
