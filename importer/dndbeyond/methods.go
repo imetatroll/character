@@ -257,12 +257,7 @@ func (char *Character) GetArmor(now int64) []dnd.CharacterArmor {
 	return armors
 }
 
-/*
-	// the kind of roll health, attack etc
-	Type base.CharacterField
-	// Materials
-	Components base.CharacterField
-*/
+// 2do Materials: Components base.CharacterField
 func (char *Character) GetSpells(now int64) []dnd.CharacterSpell {
 	spells := []dnd.CharacterSpell{}
 	for index, item := range char.Character.ClassSpells[0].Spells {
