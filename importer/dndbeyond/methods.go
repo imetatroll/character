@@ -8,6 +8,24 @@ import (
 	"imetatroll.com/character.git/lib/dnd"
 )
 
+type Duration struct {
+	Time int
+	Type int
+}
+
+type CastingTime struct {
+	Interval int
+	Unit     string
+	Type     string
+}
+
+type Range struct {
+	Origin     string
+	RangeValue int
+	AoeType    string
+	AoeValue   int
+}
+
 var NonItems = []string{"Armor", "Weapon", "Wand"}
 
 func IsNonItem(filterType string) bool {
@@ -33,6 +51,73 @@ func FilterP(val string) string {
 		filtered = append(filtered, val[i])
 	}
 	return string(filtered)
+}
+
+func SpellCastingTime(d CastingTime) string {
+	if d.Interval > 0 {
+		return strconv.Itoa(d.Interval) + " " + d.Unit + " " + d.Type
+	}
+	return strconv.Itoa(d.Interval)
+}
+
+func SpellDuration(d Duration) string {
+	if d.Time > 0 {
+		return strconv.Itoa(d.Time) + " " + SpellActivationType(d.Type)
+	}
+	return "1 " + SpellActivationType(d.Type)
+}
+
+func SpellRange(r Range) string {
+	if r.RangeValue > 0 {
+		if r.AoeType != "" {
+			return r.Origin + " " + strconv.Itoa(r.RangeValue) + " " + r.AoeType + " " + strconv.Itoa(r.AoeValue)
+		}
+		return r.Origin + " " + strconv.Itoa(r.RangeValue)
+	}
+	if r.AoeType != "" {
+		return r.Origin + " " + r.AoeType + " " + strconv.Itoa(r.AoeValue)
+	}
+	return r.Origin
+}
+
+func SpellComponents(components []int) (string, string, string) {
+	verbal, somatic, material := "false", "false", "false"
+	for _, c := range components {
+		if c == 1 {
+			verbal = "true"
+		}
+		if c == 2 {
+			somatic = "true"
+		}
+		if c == 3 {
+			material = "true"
+		}
+	}
+	return verbal, somatic, material
+}
+
+func SpellActivationType(atype int) string {
+	switch atype {
+	case 0:
+		return "none"
+	case 1:
+		return "action"
+	case 2:
+		return "action"
+	case 3:
+		return "bonus"
+	case 4:
+		return "reaction"
+	case 5:
+		return "action"
+	case 6:
+		return "minute"
+	case 7:
+		return "hour"
+	case 8:
+		return "special"
+	}
+	return ""
 }
 
 func (char *Character) GetInventory(now int64) []dnd.CharacterItem {
@@ -170,6 +255,106 @@ func (char *Character) GetArmor(now int64) []dnd.CharacterArmor {
 		}
 	}
 	return armors
+}
+
+/*
+	// the kind of roll health, attack etc
+	Type base.CharacterField
+	// Materials
+	Components base.CharacterField
+*/
+func (char *Character) GetSpells(now int64) []dnd.CharacterSpell {
+	spells := []dnd.CharacterSpell{}
+	for index, item := range char.Character.ClassSpells[0].Spells {
+		prepared := "false"
+		if item.Prepared {
+			prepared = "true"
+		}
+		damageRoll, damageDice, additional := "", "", ""
+		if len(item.Definition.Modifiers) > 0 {
+			damageRoll = strconv.Itoa(item.Definition.Modifiers[0].Die.DiceCount)
+			damageDice = strconv.Itoa(item.Definition.Modifiers[0].Die.DiceValue)
+			additional = strconv.Itoa(item.Definition.Modifiers[0].Die.FixedValue)
+		}
+		verbal, somatic, material := SpellComponents(item.Definition.Components)
+
+		spell := dnd.CharacterSpell{
+			UUID: base.CharacterField{
+				Val: strconv.Itoa(index),
+				TS:  now,
+			},
+			Name: base.CharacterField{
+				Val: item.Definition.Name,
+				TS:  now,
+			},
+			Level: base.CharacterField{
+				Val: strconv.Itoa(item.Definition.Level),
+				TS:  now,
+			},
+			School: base.CharacterField{
+				Val: item.Definition.School,
+				TS:  now,
+			},
+			Description: base.CharacterField{
+				Val: FilterP(item.Definition.Description),
+				TS:  now,
+			},
+			Prepared: base.CharacterField{
+				Val: prepared,
+				TS:  now,
+			},
+			DamageRoll: base.CharacterField{
+				Val: damageRoll,
+				TS:  now,
+			},
+			DamageDice: base.CharacterField{
+				Val: damageDice,
+				TS:  now,
+			},
+			AdditionalDamage: base.CharacterField{
+				Val: additional,
+				TS:  now,
+			},
+			ComponentVerbal: base.CharacterField{
+				Val: verbal,
+				TS:  now,
+			},
+			ComponentSomatic: base.CharacterField{
+				Val: somatic,
+				TS:  now,
+			},
+			ComponentMaterial: base.CharacterField{
+				Val: material,
+				TS:  now,
+			},
+			CastingTime: base.CharacterField{
+				Val: SpellCastingTime(CastingTime{
+					Interval: item.Definition.Duration.DurationInterval,
+					Unit:     item.Definition.Duration.DurationUnit,
+					Type:     item.Definition.Duration.DurationType,
+				}),
+				TS: now,
+			},
+			Range: base.CharacterField{
+				Val: SpellRange(Range{
+					Origin:     item.Definition.Range.Origin,
+					RangeValue: item.Definition.Range.RangeValue,
+					AoeType:    item.Definition.Range.AoeType,
+					AoeValue:   item.Definition.Range.AoeValue,
+				}),
+				TS: now,
+			},
+			Duration: base.CharacterField{
+				Val: SpellDuration(Duration{
+					Time: item.Definition.Activation.ActivationTime,
+					Type: item.Definition.Activation.ActivationType,
+				}),
+				TS: now,
+			},
+		}
+		spells = append(spells, spell)
+	}
+	return spells
 }
 
 func (char *Character) GetNotes() string {

@@ -807,10 +807,10 @@ type Character struct {
 						ActivationType int `json:"activationType"`
 					} `json:"activation"`
 					Range struct {
-						Origin     string      `json:"origin"`
-						RangeValue int         `json:"rangeValue"`
-						AoeType    interface{} `json:"aoeType"`
-						AoeValue   interface{} `json:"aoeValue"`
+						Origin     string `json:"origin"`
+						RangeValue int    `json:"rangeValue"`
+						AoeType    string `json:"aoeType"`
+						AoeValue   int    `json:"aoeValue"`
 					} `json:"range"`
 					AsPartOfWeaponAttack  bool        `json:"asPartOfWeaponAttack"`
 					Description           string      `json:"description"`
@@ -852,7 +852,7 @@ type Character struct {
 							DiceCount      int         `json:"diceCount"`
 							DiceValue      int         `json:"diceValue"`
 							DiceMultiplier interface{} `json:"diceMultiplier"`
-							FixedValue     interface{} `json:"fixedValue"`
+							FixedValue     int         `json:"fixedValue"`
 							DiceString     string      `json:"diceString"`
 						} `json:"die"`
 						Count               int         `json:"count"`
