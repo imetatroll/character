@@ -270,11 +270,24 @@ func (char *Character) GetSpells(now int64) []dnd.CharacterSpell {
 		if item.Prepared {
 			prepared = "true"
 		}
-		damageRoll, damageDice, additional := "", "", ""
+		isType, damageRoll, damageDice, additional := "None", "", "", ""
 		if len(item.Definition.Modifiers) > 0 {
 			damageRoll = strconv.Itoa(item.Definition.Modifiers[0].Die.DiceCount)
 			damageDice = strconv.Itoa(item.Definition.Modifiers[0].Die.DiceValue)
 			additional = strconv.Itoa(item.Definition.Modifiers[0].Die.FixedValue)
+
+			switch item.Definition.Modifiers[0].Type {
+			case "damage":
+				if item.Definition.Modifiers[0].Die.DiceCount > 0 {
+					isType = "DamageAttack"
+				} else {
+					isType = "Damage"
+				}
+			case "bonus":
+				if item.Definition.Modifiers[0].SubType == "hit-points" {
+					isType = "Healing"
+				}
+			}
 		}
 		verbal, somatic, material := SpellComponents(item.Definition.Components)
 
@@ -325,6 +338,10 @@ func (char *Character) GetSpells(now int64) []dnd.CharacterSpell {
 			},
 			ComponentMaterial: base.CharacterField{
 				Val: material,
+				TS:  now,
+			},
+			Type: base.CharacterField{
+				Val: isType,
 				TS:  now,
 			},
 			CastingTime: base.CharacterField{

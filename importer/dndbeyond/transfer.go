@@ -130,6 +130,41 @@ func (char *Character) Transfer(userID string) *base.Character {
 	}
 
 	// spells
+	spells := char.GetSpells(now)
+	for index, spell := range spells {
+		id := "Spells.Name." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.Name.Val, spell.Name.TS)
+		id = "Spells.Prepared." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.Prepared.Val, spell.Prepared.TS)
+		id = "Spells.Level." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.Level.Val, spell.Level.TS)
+		id = "Spells.DamageRoll." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.DamageRoll.Val, spell.DamageRoll.TS)
+		id = "Spells.DamageDice." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.DamageDice.Val, spell.DamageDice.TS)
+		id = "Spells.AdditionalDamage." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.AdditionalDamage.Val, spell.AdditionalDamage.TS)
+		id = "Spells.Type." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.Type.Val, spell.Type.TS)
+		id = "Spells.School." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.School.Val, spell.School.TS)
+		id = "Spells.CastingTime." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.CastingTime.Val, spell.CastingTime.TS)
+		id = "Spells.Range." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.Range.Val, spell.Range.TS)
+		id = "Spells.Duration." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.Duration.Val, spell.Duration.TS)
+		id = "Spells.ComponentVerbal." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.ComponentVerbal.Val, spell.ComponentVerbal.TS)
+		id = "Spells.ComponentSomatic." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.ComponentSomatic.Val, spell.ComponentSomatic.TS)
+		id = "Spells.ComponentMaterial." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.ComponentMaterial.Val, spell.ComponentMaterial.TS)
+		id = "Spells.Components." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.Components.Val, spell.Components.TS)
+		id = "Spells.Description." + strconv.Itoa(index)
+		target.Spells.Set(id, spell.Description.Val, spell.Description.TS)
+	}
 
 	return target
 }

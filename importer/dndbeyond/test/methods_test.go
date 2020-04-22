@@ -294,7 +294,7 @@ This weapon can be used with one or two hands. A damage value in parentheses app
 
 	length := character.Combat.Length("Weapons")
 	if length != 1 {
-		t.Fatalf("expecting 1 item but got %d items", length)
+		t.Fatalf("expecting 1 weapon but got %d items", length)
 	}
 	for index := 0; index < length; index++ {
 		id := "Weapons.Name." + strconv.Itoa(index)
@@ -325,7 +325,7 @@ func TestArmor(t *testing.T) {
 
 	length := character.Combat.Length("Armors")
 	if length != 1 {
-		t.Fatalf("expecting 1 item but got %d items", length)
+		t.Fatalf("expecting 1 armor but got %d items", length)
 	}
 	for index := 0; index < length; index++ {
 		id := "Armors.Name." + strconv.Itoa(index)
@@ -368,6 +368,92 @@ func TestArmor(t *testing.T) {
 		if val != "55.0" {
 			t.Fatalf("expecting '55.0' but got '%s'", val)
 		}
+	}
+}
+
+func TestSpells(t *testing.T) {
+	character := ReadCharacter(t)
+
+	length := character.Spells.Length("Spells")
+	if length != 8 {
+		t.Fatalf("expecting 8 spells but got %d items", length)
+	}
+	index := 0
+
+	id := "Spells.Name." + strconv.Itoa(index)
+	val, _ := character.Spells.Get(id)
+	if val != "Chill Touch" {
+		t.Fatalf("expecting 'Chain Mail' but got '%s'", val)
+	}
+	id = "Spells.Prepared." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "false" {
+		t.Fatalf("expecting 'false' but got '%s'", val)
+	}
+	id = "Spells.Level." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "0" {
+		t.Fatalf("expecting '0' but got '%s'", val)
+	}
+	id = "Spells.DamageRoll." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "1" {
+		t.Fatalf("expecting '1' but got '%s'", val)
+	}
+	id = "Spells.DamageDice." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "8" {
+		t.Fatalf("expecting '8' but got '%s'", val)
+	}
+	id = "Spells.AdditionalDamage." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "0" {
+		t.Fatalf("expecting '0' but got '%s'", val)
+	}
+	id = "Spells.Type." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "DamageAttack" {
+		t.Fatalf("expecting 'DamageAttack' but got '%s'", val)
+	}
+	id = "Spells.School." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "Necromancy" {
+		t.Fatalf("expecting 'Necromancy' but got '%s'", val)
+	}
+	id = "Spells.CastingTime." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "1 Round Time" {
+		t.Fatalf("expecting '1 Round Time' but got '%s'", val)
+	}
+	id = "Spells.Range." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "Ranged 120" {
+		t.Fatalf("expecting 'Ranged 120' but got '%s'", val)
+	}
+	id = "Spells.Duration." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "1 action" {
+		t.Fatalf("expecting '1 action' but got '%s'", val)
+	}
+	id = "Spells.ComponentVerbal." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "true" {
+		t.Fatalf("expecting 'true' but got '%s'", val)
+	}
+	id = "Spells.ComponentSomatic." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "true" {
+		t.Fatalf("expecting 'true' but got '%s'", val)
+	}
+	id = "Spells.ComponentMaterial." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "false" {
+		t.Fatalf("expecting 'false' but got '%s'", val)
+	}
+	id = "Spells.Components." + strconv.Itoa(index)
+	val, _ = character.Spells.Get(id)
+	if val != "" {
+		t.Fatalf("expecting '' but got '%s'", val)
 	}
 }
 
