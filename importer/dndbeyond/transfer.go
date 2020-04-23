@@ -29,6 +29,8 @@ func (char *Character) Transfer(userID string) *base.Character {
 	target.Top.Set("Alignment", char.GetAlignment(), now)
 	target.Top.Set("XP", strconv.Itoa(char.Character.CurrentXp), now)
 	target.Top.Set("Level", strconv.Itoa(char.Character.Classes[0].Level), now)
+	target.Top.Set("CurrentHP", strconv.Itoa(char.Character.BaseHitPoints), now)
+	target.Top.Set("TemporaryHP", strconv.Itoa(char.Character.TemporaryHitPoints), now)
 
 	// abilities
 	target.Top.Set("Strength", char.GetAbility("Strength"), now)
