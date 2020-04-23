@@ -130,6 +130,8 @@ func (char *Character) Transfer(userID string) *base.Character {
 	}
 
 	// spells
+	// 2do: used spell counts: is set in export data
+	//      levelSpellSlots: max spells per level
 	spells := char.GetSpells(now)
 	for index, spell := range spells {
 		id := "Spells.Name." + strconv.Itoa(index)
