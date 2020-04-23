@@ -1,6 +1,10 @@
 package main
 
-import "github.com/gopherjs/gopherjs/js"
+import (
+	"github.com/gopherjs/gopherjs/js"
+
+	"imetatroll.com/character.git/importer/dndbeyond"
+)
 
 func main() {
 	doc := js.Global.Get("document")
@@ -14,8 +18,17 @@ func main() {
 			}
 			fileReader := js.Global.Get("FileReader").New()
 			fileReader.Set("onload", func(fi *js.Object) {
-				values := js.Global.Get("JSON").Call("parse", fi.Get("target").Get("result"))
-				println("loaded values", values)
+				obj := js.Global.Get("JSON").Call("parse", fi.Get("target").Get("result"))
+				char := &beyond.Character{}
+				char.Object = obj
+
+				// println values here when manually testing
+
+				println(char.Character.Name)
+				for i, slot := range char.Character.Classes[0].Definition.SpellRules.LevelSpellSlots[1] {
+					println(i, slot)
+				}
+				println(char.Character.Classes[0].Definition.SpellRules.IsRitualSpellCaster)
 			})
 			fileReader.Call("readAsText", file)
 		})
