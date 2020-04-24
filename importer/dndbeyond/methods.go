@@ -458,7 +458,7 @@ func (char *Character) GetRacialAbilityModifier(id int, name string) int {
 	return 0
 }
 
-func (char *Character) GetAbility(name string) string {
+func (char *Character) GetAbilityInt(name string) int {
 	id := -1
 	switch name {
 	case "Strength":
@@ -477,10 +477,14 @@ func (char *Character) GetAbility(name string) string {
 	bonus := char.GetRacialAbilityModifier(id, name)
 	for _, stat := range char.Character.Stats {
 		if stat.ID == id {
-			return strconv.Itoa(stat.Value + bonus)
+			return stat.Value + bonus
 		}
 	}
-	return "0"
+	return 0
+}
+
+func (char *Character) GetAbility(name string) string {
+	return strconv.Itoa(char.GetAbilityInt(name))
 }
 
 func (char *Character) GetAlignment() string {

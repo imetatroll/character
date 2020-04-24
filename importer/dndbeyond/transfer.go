@@ -29,8 +29,6 @@ func (char *Character) Transfer(userID string) *base.Character {
 	target.Top.Set("Alignment", char.GetAlignment(), now)
 	target.Top.Set("XP", strconv.Itoa(char.Character.CurrentXp), now)
 	target.Top.Set("Level", strconv.Itoa(char.Character.Classes[0].Level), now)
-	target.Top.Set("CurrentHP", strconv.Itoa(char.Character.BaseHitPoints), now)
-	target.Top.Set("TemporaryHP", strconv.Itoa(char.Character.TemporaryHitPoints), now)
 
 	// abilities
 	target.Top.Set("Strength", char.GetAbility("Strength"), now)
@@ -92,6 +90,13 @@ func (char *Character) Transfer(userID string) *base.Character {
 		id = "Items.Weight." + strconv.Itoa(index)
 		target.Items.Set(id, item.Weight.Val, item.Weight.TS)
 	}
+
+	// HP
+	modifier := (char.GetAbilityInt("Constitution") - 10) / 2
+	maxHP := modifier*char.Character.Classes[0].Level + char.Character.BaseHitPoints
+	target.Combat.Set("CurrentHP", strconv.Itoa(maxHP-char.Character.RemovedHitPoints), now)
+	target.Combat.Set("MaxHP", strconv.Itoa(maxHP), now)
+	target.Combat.Set("TemporaryHP", strconv.Itoa(char.Character.TemporaryHitPoints), now)
 
 	// weapons
 	weapons := char.GetWeapons(now)
