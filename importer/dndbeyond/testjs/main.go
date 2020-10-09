@@ -24,11 +24,11 @@ func main() {
 
 				// println values here when manually testing
 
-				println(char.Character.Name)
-				for i, slot := range char.Character.Classes[0].Definition.SpellRules.LevelSpellSlots[1] {
+				println(char.Data.Name)
+				for i, slot := range char.Data.Classes[0].Definition.SpellRules.LevelSpellSlots[1] {
 					println(i, slot)
 				}
-				println(char.Character.Classes[0].Definition.SpellRules.IsRitualSpellCaster)
+				println(char.Data.Classes[0].Definition.SpellRules.IsRitualSpellCaster)
 			})
 			fileReader.Call("readAsText", file)
 		})
