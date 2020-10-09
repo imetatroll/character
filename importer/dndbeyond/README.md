@@ -12,14 +12,15 @@ the imetatroll.com 5ESRD system.
 
 The url will look like this:
 ```
-https://www.dndbeyond.com/profile/<username>/characters/<id>
+https://character-service.dndbeyond.com/character/v3/character/xxxxxxxx
+```
+Replace xxxxxxxx with your character id from
+```
+https://www.dndbeyond.com/profile/username/characters/id
 ```
 
-### Append "/json" to the end of the url
+###
 
-```
-https://www.dndbeyond.com/profile/<username>/characters/<id>/json
-```
 
 ### Save the page as a json document
 

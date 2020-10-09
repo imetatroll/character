@@ -18,274 +18,264 @@ type Character struct {
 	// logic in order to work around internal library issues.
 	IsJsEnv bool
 
-	Character struct {
-		*js.Object
-
-		ID                         int    `json:"id" js:"id"`
-		ReadonlyURL                string `json:"readonlyUrl" js:"readonlyUrl"`
-		AvatarURL                  string `json:"avatarUrl" js:"avatarUrl"`
-		FrameAvatarURL             string `json:"frameAvatarUrl" js:"frameAvatarUrl"`
-		BackdropAvatarURL          string `json:"backdropAvatarUrl" js:"backdropAvatarUrl"`
-		SmallBackdropAvatarURL     string `json:"smallBackdropAvatarUrl" js:"smallBackdropAvatarUrl"`
-		LargeBackdropAvatarURL     string `json:"largeBackdropAvatarUrl" js:"largeBackdropAvatarUrl"`
-		ThumbnailBackdropAvatarURL string `json:"thumbnailBackdropAvatarUrl" js:"thumbnailBackdropAvatarUrl"`
+	// extracted using https://transform.tools/json-to-go
+	ID      int    `json:"id"`
+	Success bool   `json:"success"`
+	Message string `json:"message"`
+	Data    struct {
+		ID                         int         `json:"id"`
+		ReadonlyURL                string      `json:"readonlyUrl"`
+		AvatarURL                  interface{} `json:"avatarUrl"`
+		FrameAvatarURL             interface{} `json:"frameAvatarUrl"`
+		BackdropAvatarURL          interface{} `json:"backdropAvatarUrl"`
+		SmallBackdropAvatarURL     interface{} `json:"smallBackdropAvatarUrl"`
+		LargeBackdropAvatarURL     interface{} `json:"largeBackdropAvatarUrl"`
+		ThumbnailBackdropAvatarURL interface{} `json:"thumbnailBackdropAvatarUrl"`
 		DefaultBackdrop            struct {
-			*js.Object
-
-			BackdropAvatarURL          string `json:"backdropAvatarUrl" js:"backdropAvatarUrl"`
-			SmallBackdropAvatarURL     string `json:"smallBackdropAvatarUrl" js:"smallBackdropAvatarUrl"`
-			LargeBackdropAvatarURL     string `json:"largeBackdropAvatarUrl" js:"largeBackdropAvatarUrl"`
-			ThumbnailBackdropAvatarURL string `json:"thumbnailBackdropAvatarUrl" js:"thumbnailBackdropAvatarUrl"`
-		} `json:"defaultBackdrop" js:"defaultBackdrop"`
-		AvatarID              interface{} `json:"avatarId" js:"avatarId"`
-		FrameAvatarID         interface{} `json:"frameAvatarId" js:"frameAvatarId"`
-		BackdropAvatarID      interface{} `json:"backdropAvatarId" js:"backdropAvatarId"`
-		SmallBackdropAvatarID interface{} `json:"smallBackdropAvatarId" js:"smallBackdropAvatarId"`
-		LargeBackdropAvatarID interface{} `json:"largeBackdropAvatarId" js:"largeBackdropAvatarId"`
-		ThumbnailAvatarID     interface{} `json:"thumbnailAvatarId" js:"thumbnailAvatarId"`
-		ThemeColorID          int         `json:"themeColorId" js:"themeColorId"`
-		ThemeColor            struct {
-			*js.Object
-
-			ThemeColorID    int         `json:"themeColorId" js:"themeColorId"`
-			ThemeColor      string      `json:"themeColor" js:"themeColor"`
-			BackgroundColor string      `json:"backgroundColor" js:"backgroundColor"`
-			Name            string      `json:"name" js:"name"`
-			RaceID          interface{} `json:"raceId" js:"raceId"`
-			SubRaceID       interface{} `json:"subRaceId" js:"subRaceId"`
-			ClassID         int         `json:"classId" js:"classId"`
-			Tags            []string    `json:"tags" js:"tags"`
-		} `json:"themeColor" js:"themeColor"`
-		Name               string      `json:"name" js:"name"`
-		SocialName         interface{} `json:"socialName" js:"socialName"`
-		Gender             string      `json:"gender" js:"gender"`
-		Faith              string      `json:"faith" js:"faith"`
-		Age                int         `json:"age" js:"age"`
-		Hair               string      `json:"hair" js:"hair"`
-		Eyes               string      `json:"eyes" js:"eyes"`
-		Skin               string      `json:"skin" js:"skin"`
-		Height             string      `json:"height" js:"height"`
-		Weight             int         `json:"weight" js:"weight"`
-		Inspiration        bool        `json:"inspiration" js:"inspiration"`
-		BaseHitPoints      int         `json:"baseHitPoints" js:"baseHitPoints"`
-		BonusHitPoints     interface{} `json:"bonusHitPoints" js:"bonusHitPoints"`
-		OverrideHitPoints  interface{} `json:"overrideHitPoints" js:"overrideHitPoints"`
-		RemovedHitPoints   int         `json:"removedHitPoints" js:"removedHitPoints"`
-		TemporaryHitPoints int         `json:"temporaryHitPoints" js:"temporaryHitPoints"`
-		CurrentXp          int         `json:"currentXp" js:"currentXp"`
-		AlignmentID        int         `json:"alignmentId" js:"alignmentId"`
-		LifestyleID        int         `json:"lifestyleId" js:"lifestyleId"`
+			BackdropAvatarURL          string `json:"backdropAvatarUrl"`
+			SmallBackdropAvatarURL     string `json:"smallBackdropAvatarUrl"`
+			LargeBackdropAvatarURL     string `json:"largeBackdropAvatarUrl"`
+			ThumbnailBackdropAvatarURL string `json:"thumbnailBackdropAvatarUrl"`
+		} `json:"defaultBackdrop"`
+		AvatarID                  interface{} `json:"avatarId"`
+		FrameAvatarID             interface{} `json:"frameAvatarId"`
+		BackdropAvatarID          interface{} `json:"backdropAvatarId"`
+		SmallBackdropAvatarID     interface{} `json:"smallBackdropAvatarId"`
+		LargeBackdropAvatarID     interface{} `json:"largeBackdropAvatarId"`
+		ThumbnailBackdropAvatarID interface{} `json:"thumbnailBackdropAvatarId"`
+		ThemeColorID              int         `json:"themeColorId"`
+		ThemeColor                struct {
+			BackgroundColor string      `json:"backgroundColor"`
+			ClassID         int         `json:"classId"`
+			Name            string      `json:"name"`
+			RaceID          interface{} `json:"raceId"`
+			SubRaceID       interface{} `json:"subRaceId"`
+			Tags            []string    `json:"tags"`
+			ThemeColor      string      `json:"themeColor"`
+			ThemeColorID    int         `json:"themeColorId"`
+			DecorationKey   interface{} `json:"decorationKey"`
+		} `json:"themeColor"`
+		Name               string      `json:"name"`
+		SocialName         interface{} `json:"socialName"`
+		Gender             string      `json:"gender"`
+		Faith              string      `json:"faith"`
+		Age                int         `json:"age"`
+		Hair               string      `json:"hair"`
+		Eyes               string      `json:"eyes"`
+		Skin               string      `json:"skin"`
+		Height             string      `json:"height"`
+		Weight             int         `json:"weight"`
+		Inspiration        bool        `json:"inspiration"`
+		BaseHitPoints      int         `json:"baseHitPoints"`
+		BonusHitPoints     interface{} `json:"bonusHitPoints"`
+		OverrideHitPoints  interface{} `json:"overrideHitPoints"`
+		RemovedHitPoints   int         `json:"removedHitPoints"`
+		TemporaryHitPoints int         `json:"temporaryHitPoints"`
+		CurrentXp          int         `json:"currentXp"`
+		AlignmentID        int         `json:"alignmentId"`
+		LifestyleID        int         `json:"lifestyleId"`
 		Stats              []struct {
-			*js.Object
-
-			ID    int         `json:"id" js:"id"`
-			Name  interface{} `json:"name" js:"name"`
-			Value int         `json:"value" js:"value"`
-		} `json:"stats" js:"stats"`
+			ID    int         `json:"id"`
+			Name  interface{} `json:"name"`
+			Value int         `json:"value"`
+		} `json:"stats"`
 		BonusStats []struct {
-			*js.Object
-
-			ID    int         `json:"id" js:"id"`
-			Name  interface{} `json:"name" js:"name"`
-			Value int         `json:"value" js:"value"`
-		} `json:"bonusStats" js:"bonusStats"`
+			ID    int         `json:"id"`
+			Name  interface{} `json:"name"`
+			Value int         `json:"value"`
+		} `json:"bonusStats"`
 		OverrideStats []struct {
-			*js.Object
-
-			ID    int         `json:"id" js:"id"`
-			Name  interface{} `json:"name" js:"name"`
-			Value interface{} `json:"value" js:"value"`
-		} `json:"overrideStats" js:"overrideStats"`
+			ID    int         `json:"id"`
+			Name  interface{} `json:"name"`
+			Value interface{} `json:"value"`
+		} `json:"overrideStats"`
 		Background struct {
-			*js.Object
-
-			HasCustomBackground bool `json:"hasCustomBackground" js:"hasCustomBackground"`
-			Definition          struct {
-				*js.Object
-
-				ID                                  int           `json:"id" js:"id"`
-				EntityTypeID                        int           `json:"entityTypeId" js:"entityTypeId"`
-				Name                                string        `json:"name" js:"name"`
-				Description                         string        `json:"description" js:"description"`
-				Snippet                             string        `json:"snippet" js:"snippet"`
-				ShortDescription                    string        `json:"shortDescription" js:"shortDescription"`
-				SkillProficienciesDescription       string        `json:"skillProficienciesDescription" js:"skillProficienciesDescription"`
-				ToolProficienciesDescription        string        `json:"toolProficienciesDescription" js:"toolProficienciesDescription"`
-				LanguagesDescription                string        `json:"languagesDescription" js:"languagesDescription"`
-				EquipmentDescription                string        `json:"equipmentDescription" js:"equipmentDescription"`
-				FeatureName                         string        `json:"featureName" js:"featureName"`
-				FeatureDescription                  string        `json:"featureDescription" js:"featureDescription"`
-				AvatarURL                           interface{}   `json:"avatarUrl" js:"avatarUrl"`
-				LargeAvatarURL                      interface{}   `json:"largeAvatarUrl" js:"largeAvatarUrl"`
-				SuggestedCharacteristicsDescription string        `json:"suggestedCharacteristicsDescription" js:"suggestedCharacteristicsDescription"`
-				SuggestedProficiencies              []string      `json:"suggestedProficiencies" js:"suggestedProficiencies"`
-				SuggestedLanguages                  []interface{} `json:"suggestedLanguages" js:"suggestedLanguages"`
-				Organization                        interface{}   `json:"organization" js:"organization"`
-				ContractsDescription                string        `json:"contractsDescription" js:"contractsDescription"`
-				SpellsPreDescription                string        `json:"spellsPreDescription" js:"spellsPreDescription"`
-				SpellsPostDescription               string        `json:"spellsPostDescription" js:"spellsPostDescription"`
-				PersonalityTraits                   []struct {
-					*js.Object
-
-					ID          int    `json:"id" js:"id"`
-					Description string `json:"description" js:"description"`
-					DiceRoll    int    `json:"diceRoll" js:"diceRoll"`
-				} `json:"personalityTraits" js:"personalityTraits"`
-				Ideals []struct {
-					*js.Object
-
-					ID          int    `json:"id" js:"id"`
-					Description string `json:"description" js:"description"`
-					DiceRoll    int    `json:"diceRoll" js:"diceRoll"`
-				} `json:"ideals" js:"ideals"`
-				Bonds []struct {
-					*js.Object
-
-					ID          int    `json:"id" js:"id"`
-					Description string `json:"description" js:"description"`
-					DiceRoll    int    `json:"diceRoll" js:"diceRoll"`
-				} `json:"bonds" js:"bonds"`
-				Flaws []struct {
-					*js.Object
-
-					ID          int    `json:"id" js:"id"`
-					Description string `json:"description" js:"description"`
-					DiceRoll    int    `json:"diceRoll" js:"diceRoll"`
-				} `json:"flaws" js:"flaws"`
-			} `json:"definition" js:"definition"`
 			CustomBackground struct {
-				*js.Object
-
-				ID                        int         `json:"id" js:"id"`
-				EntityTypeID              int         `json:"entityTypeId" js:"entityTypeId"`
-				Name                      interface{} `json:"name" js:"name"`
-				Description               interface{} `json:"description" js:"description"`
-				FeaturesBackground        interface{} `json:"featuresBackground" js:"featuresBackground"`
-				CharacteristicsBackground interface{} `json:"characteristicsBackground" js:"characteristicsBackground"`
-				BackgroundType            interface{} `json:"backgroundType" js:"backgroundType"`
-			} `json:"customBackground" js:"customBackground"`
-		} `json:"background" js:"background"`
+				BackgroundType                        interface{} `json:"backgroundType"`
+				CharacteristicsBackground             interface{} `json:"characteristicsBackground"`
+				CharacteristicsBackgroundDefinitionID interface{} `json:"characteristicsBackgroundDefinitionId"`
+				Description                           interface{} `json:"description"`
+				EntityTypeID                          int         `json:"entityTypeId"`
+				FeaturesBackground                    interface{} `json:"featuresBackground"`
+				FeaturesBackgroundDefinitionID        interface{} `json:"featuresBackgroundDefinitionId"`
+				ID                                    int         `json:"id"`
+				Name                                  interface{} `json:"name"`
+			} `json:"customBackground"`
+			Definition struct {
+				AvatarURL interface{} `json:"avatarUrl"`
+				Bonds     []struct {
+					Description string `json:"description"`
+					DiceRoll    int    `json:"diceRoll"`
+					ID          int    `json:"id"`
+				} `json:"bonds"`
+				ContractsDescription string `json:"contractsDescription"`
+				Description          string `json:"description"`
+				EntityTypeID         int    `json:"entityTypeId"`
+				EquipmentDescription string `json:"equipmentDescription"`
+				FeatureDescription   string `json:"featureDescription"`
+				FeatureName          string `json:"featureName"`
+				Flaws                []struct {
+					Description string `json:"description"`
+					DiceRoll    int    `json:"diceRoll"`
+					ID          int    `json:"id"`
+				} `json:"flaws"`
+				ID     int `json:"id"`
+				Ideals []struct {
+					Description string `json:"description"`
+					DiceRoll    int    `json:"diceRoll"`
+					ID          int    `json:"id"`
+				} `json:"ideals"`
+				LanguagesDescription string      `json:"languagesDescription"`
+				LargeAvatarURL       interface{} `json:"largeAvatarUrl"`
+				Name                 string      `json:"name"`
+				Organization         interface{} `json:"organization"`
+				PersonalityTraits    []struct {
+					Description string `json:"description"`
+					DiceRoll    int    `json:"diceRoll"`
+					ID          int    `json:"id"`
+				} `json:"personalityTraits"`
+				ShortDescription                    string      `json:"shortDescription"`
+				SkillProficienciesDescription       string      `json:"skillProficienciesDescription"`
+				Snippet                             string      `json:"snippet"`
+				SpellsPostDescription               string      `json:"spellsPostDescription"`
+				SpellsPreDescription                string      `json:"spellsPreDescription"`
+				SuggestedCharacteristicsDescription string      `json:"suggestedCharacteristicsDescription"`
+				SuggestedLanguages                  interface{} `json:"suggestedLanguages"`
+				SuggestedProficiencies              interface{} `json:"suggestedProficiencies"`
+				ToolProficienciesDescription        string      `json:"toolProficienciesDescription"`
+				IsHomebrew                          bool        `json:"isHomebrew"`
+				Sources                             []struct {
+					SourceID   int         `json:"sourceId"`
+					PageNumber interface{} `json:"pageNumber"`
+					SourceType int         `json:"sourceType"`
+				} `json:"sources"`
+				SpellListIds []interface{} `json:"spellListIds"`
+			} `json:"definition"`
+			DefinitionID        interface{} `json:"definitionId"`
+			HasCustomBackground bool        `json:"hasCustomBackground"`
+		} `json:"background"`
 		Race struct {
-			*js.Object
-
-			EntityRaceID      int         `json:"entityRaceId" js:"entityRaceId"`
-			EntityRaceTypeID  int         `json:"entityRaceTypeId" js:"entityRaceTypeId"`
-			FullName          string      `json:"fullName" js:"fullName"`
-			BaseRaceID        int         `json:"baseRaceId" js:"baseRaceId"`
-			BaseRaceTypeID    int         `json:"baseRaceTypeId" js:"baseRaceTypeId"`
-			Description       string      `json:"description" js:"description"`
-			AvatarURL         interface{} `json:"avatarUrl" js:"avatarUrl"`
-			LargeAvatarURL    interface{} `json:"largeAvatarUrl" js:"largeAvatarUrl"`
-			PortraitAvatarURL string      `json:"portraitAvatarUrl" js:"portraitAvatarUrl"`
-			MoreDetailsURL    string      `json:"moreDetailsUrl" js:"moreDetailsUrl"`
-			IsHomebrew        bool        `json:"isHomebrew" js:"isHomebrew"`
-			SourceIds         []int       `json:"sourceIds" js:"sourceIds"`
-			GroupIds          []int       `json:"groupIds" js:"groupIds"`
-			Type              int         `json:"type" js:"type"`
-			SubRaceShortName  string      `json:"subRaceShortName" js:"subRaceShortName"`
-			BaseName          string      `json:"baseName" js:"baseName"`
+			IsSubRace         bool          `json:"isSubRace"`
+			BaseRaceName      string        `json:"baseRaceName"`
+			EntityRaceID      int           `json:"entityRaceId"`
+			EntityRaceTypeID  int           `json:"entityRaceTypeId"`
+			FullName          string        `json:"fullName"`
+			BaseRaceID        int           `json:"baseRaceId"`
+			BaseRaceTypeID    int           `json:"baseRaceTypeId"`
+			Description       string        `json:"description"`
+			AvatarURL         interface{}   `json:"avatarUrl"`
+			LargeAvatarURL    interface{}   `json:"largeAvatarUrl"`
+			PortraitAvatarURL string        `json:"portraitAvatarUrl"`
+			MoreDetailsURL    string        `json:"moreDetailsUrl"`
+			IsHomebrew        bool          `json:"isHomebrew"`
+			SourceIds         []interface{} `json:"sourceIds"`
+			GroupIds          []int         `json:"groupIds"`
+			Type              int           `json:"type"`
+			SubRaceShortName  string        `json:"subRaceShortName"`
+			BaseName          string        `json:"baseName"`
 			RacialTraits      []struct {
-				*js.Object
-
 				Definition struct {
-					*js.Object
-
-					ID            int         `json:"id" js:"id"`
-					EntityTypeID  int         `json:"entityTypeId" js:"entityTypeId"`
-					DisplayOrder  int         `json:"displayOrder" js:"displayOrder"`
-					Name          string      `json:"name" js:"name"`
-					Description   string      `json:"description" js:"description"`
-					Snippet       interface{} `json:"snippet" js:"snippet"`
-					HideInBuilder bool        `json:"hideInBuilder" js:"hideInBuilder"`
-					HideInSheet   bool        `json:"hideInSheet" js:"hideInSheet"`
-					Activation    struct {
-						*js.Object
-
-						ActivationTime interface{} `json:"activationTime" js:"activationTime"`
-						ActivationType interface{} `json:"activationType" js:"activationType"`
-					} `json:"activation" js:"activation"`
-					SourceID         int           `json:"sourceId" js:"sourceId"`
-					SourcePageNumber int           `json:"sourcePageNumber" js:"sourcePageNumber"`
-					CreatureRules    []interface{} `json:"creatureRules" js:"creatureRules"`
-				} `json:"definition" js:"definition"`
-			} `json:"racialTraits" js:"racialTraits"`
+					ID                            int           `json:"id"`
+					DefinitionKey                 string        `json:"definitionKey"`
+					EntityTypeID                  int           `json:"entityTypeId"`
+					DisplayOrder                  int           `json:"displayOrder"`
+					Name                          string        `json:"name"`
+					Description                   string        `json:"description"`
+					Snippet                       string        `json:"snippet"`
+					HideInBuilder                 bool          `json:"hideInBuilder"`
+					HideInSheet                   bool          `json:"hideInSheet"`
+					Activation                    interface{}   `json:"activation"`
+					SourceID                      int           `json:"sourceId"`
+					SourcePageNumber              int           `json:"sourcePageNumber"`
+					CreatureRules                 []interface{} `json:"creatureRules"`
+					SpellListIds                  []interface{} `json:"spellListIds"`
+					FeatureType                   int           `json:"featureType"`
+					Sources                       interface{}   `json:"sources"`
+					AffectedFeatureDefinitionKeys []interface{} `json:"affectedFeatureDefinitionKeys"`
+					IsCalledOut                   bool          `json:"isCalledOut"`
+				} `json:"definition"`
+			} `json:"racialTraits"`
 			WeightSpeeds struct {
-				*js.Object
-
-				Normal struct {
-					*js.Object
-
-					Walk   int `json:"walk" js:"walk"`
-					Fly    int `json:"fly" js:"fly"`
-					Burrow int `json:"burrow" js:"burrow"`
-					Swim   int `json:"swim" js:"swim"`
-					Climb  int `json:"climb" js:"climb"`
-				} `json:"normal" js:"normal"`
-				Encumbered        interface{} `json:"encumbered" js:"encumbered"`
-				HeavilyEncumbered interface{} `json:"heavilyEncumbered" js:"heavilyEncumbered"`
-				PushDragLift      interface{} `json:"pushDragLift" js:"pushDragLift"`
-				Override          interface{} `json:"override" js:"override"`
-			} `json:"weightSpeeds" js:"weightSpeeds"`
-			FeatIds []interface{} `json:"featIds" js:"featIds"`
-			Size    string        `json:"size" js:"size"`
-			SizeID  int           `json:"sizeId" js:"sizeId"`
-		} `json:"race" js:"race"`
-		Notes struct {
-			*js.Object
-
-			Allies              string      `json:"allies" js:"allies"`
-			PersonalPossessions string      `json:"personalPossessions" js:"personalPossessions"`
-			OtherHoldings       interface{} `json:"otherHoldings" js:"otherHoldings"`
-			Organizations       string      `json:"organizations" js:"organizations"`
-			Enemies             string      `json:"enemies" js:"enemies"`
-			Backstory           string      `json:"backstory" js:"backstory"`
-			OtherNotes          string      `json:"otherNotes" js:"otherNotes"`
-		} `json:"notes" js:"notes"`
+				Encumbered        interface{} `json:"encumbered"`
+				HeavilyEncumbered interface{} `json:"heavilyEncumbered"`
+				Normal            struct {
+					Burrow int `json:"burrow"`
+					Climb  int `json:"climb"`
+					Fly    int `json:"fly"`
+					Swim   int `json:"swim"`
+					Walk   int `json:"walk"`
+				} `json:"normal"`
+				Override     interface{} `json:"override"`
+				PushDragLift interface{} `json:"pushDragLift"`
+			} `json:"weightSpeeds"`
+			FeatIds         []interface{} `json:"featIds"`
+			Size            interface{}   `json:"size"`
+			SizeID          int           `json:"sizeId"`
+			SupportsSubrace interface{}   `json:"supportsSubrace"`
+			Sources         []struct {
+				SourceID   int         `json:"sourceId"`
+				PageNumber interface{} `json:"pageNumber"`
+				SourceType int         `json:"sourceType"`
+			} `json:"sources"`
+		} `json:"race"`
+		RaceDefinitionID     interface{} `json:"raceDefinitionId"`
+		RaceDefinitionTypeID interface{} `json:"raceDefinitionTypeId"`
+		Notes                struct {
+			Allies              string      `json:"allies"`
+			Backstory           string      `json:"backstory"`
+			Enemies             string      `json:"enemies"`
+			Organizations       string      `json:"organizations"`
+			OtherHoldings       interface{} `json:"otherHoldings"`
+			OtherNotes          string      `json:"otherNotes"`
+			PersonalPossessions string      `json:"personalPossessions"`
+		} `json:"notes"`
 		Traits struct {
-			*js.Object
-
-			PersonalityTraits string `json:"personalityTraits" js:"personalityTraits"`
-			Ideals            string `json:"ideals" js:"ideals"`
-			Bonds             string `json:"bonds" js:"bonds"`
-			Flaws             string `json:"flaws" js:"flaws"`
-			Appearance        string `json:"appearance" js:"appearance"`
-		} `json:"traits" js:"traits"`
+			Appearance        string `json:"appearance"`
+			Bonds             string `json:"bonds"`
+			Flaws             string `json:"flaws"`
+			Ideals            string `json:"ideals"`
+			PersonalityTraits string `json:"personalityTraits"`
+		} `json:"traits"`
 		Preferences struct {
-			*js.Object
-
-			UseHomebrewContent      bool `json:"useHomebrewContent" js:"useHomebrewContent"`
-			ProgressionType         int  `json:"progressionType" js:"progressionType"`
-			EncumbranceType         int  `json:"encumbranceType" js:"encumbranceType"`
-			IgnoreCoinWeight        bool `json:"ignoreCoinWeight" js:"ignoreCoinWeight"`
-			HitPointType            int  `json:"hitPointType" js:"hitPointType"`
-			ShowUnarmedStrike       bool `json:"showUnarmedStrike" js:"showUnarmedStrike"`
-			ShowCompanions          bool `json:"showCompanions" js:"showCompanions"`
-			ShowWildShape           bool `json:"showWildShape" js:"showWildShape"`
-			PrimarySense            int  `json:"primarySense" js:"primarySense"`
-			PrimaryMovement         int  `json:"primaryMovement" js:"primaryMovement"`
-			PrivacyType             int  `json:"privacyType" js:"privacyType"`
-			SharingType             int  `json:"sharingType" js:"sharingType"`
-			AbilityScoreDisplayType int  `json:"abilityScoreDisplayType" js:"abilityScoreDisplayType"`
-			EnforceFeatRules        bool `json:"enforceFeatRules" js:"enforceFeatRules"`
-			EnforceMulticlassRules  bool `json:"enforceMulticlassRules" js:"enforceMulticlassRules"`
-		} `json:"preferences" js:"preferences"`
-		Lifestyle interface{} `json:"lifestyle" js:"lifestyle"`
+			AbilityScoreDisplayType     int  `json:"abilityScoreDisplayType"`
+			EncumbranceType             int  `json:"encumbranceType"`
+			EnforceFeatRules            bool `json:"enforceFeatRules"`
+			EnforceMulticlassRules      bool `json:"enforceMulticlassRules"`
+			ShowScaledSpells            bool `json:"showScaledSpells"`
+			HitPointType                int  `json:"hitPointType"`
+			IgnoreCoinWeight            bool `json:"ignoreCoinWeight"`
+			PrimaryMovement             int  `json:"primaryMovement"`
+			PrimarySense                int  `json:"primarySense"`
+			PrivacyType                 int  `json:"privacyType"`
+			ProgressionType             int  `json:"progressionType"`
+			SharingType                 int  `json:"sharingType"`
+			ShowUnarmedStrike           bool `json:"showUnarmedStrike"`
+			UseHomebrewContent          bool `json:"useHomebrewContent"`
+			EnableOptionalClassFeatures bool `json:"enableOptionalClassFeatures"`
+			EnableOptionalOrigins       bool `json:"enableOptionalOrigins"`
+		} `json:"preferences"`
+		Configuration struct {
+			AbilityScoreType      int         `json:"abilityScoreType"`
+			ShowHelpText          bool        `json:"showHelpText"`
+			StartingEquipmentType interface{} `json:"startingEquipmentType"`
+		} `json:"configuration"`
+		Lifestyle interface{} `json:"lifestyle"`
 		Inventory []struct {
-			*js.Object
-
-			DisplayAsAttack interface{} `json:"displayAsAttack" js:"displayAsAttack"`
-			ID              int         `json:"id" js:"id"`
-			EntityTypeID    int         `json:"entityTypeId" js:"entityTypeId"`
-			Definition      struct {
-				*js.Object
-
-				BaseItemID          int    `json:"baseItemId" js:"baseItemId"`
-				BaseArmorName       string `json:"baseArmorName" js:"baseArmorName"`
-				StrengthRequirement int    `json:"strengthRequirement" js:"strengthRequirement"`
-				ArmorClass          int    `json:"armorClass" js:"armorClass"`
-				StealthCheck        int    `json:"stealthCheck" js:"stealthCheck"`
-				ArmorTypeID         int    `json:"armorTypeId" js:"armorTypeId"`
-				Damage              struct {
+			ChargesUsed int `json:"chargesUsed"`
+			Definition  struct {
+				ArmorClass            int         `json:"armorClass"`
+				AttackType            interface{} `json:"attackType"`
+				AttunementDescription string      `json:"attunementDescription"`
+				AvatarURL             interface{} `json:"avatarUrl"`
+				BaseArmorName         interface{} `json:"baseArmorName"`
+				BaseItemID            interface{} `json:"baseItemId"`
+				BaseTypeID            int         `json:"baseTypeId"`
+				BundleSize            int         `json:"bundleSize"`
+				CanAttune             bool        `json:"canAttune"`
+				CanEquip              bool        `json:"canEquip"`
+				CategoryID            interface{} `json:"categoryId"`
+				Cost                  interface{} `json:"cost"`
+				Damage                struct {
 					*js.Object
 
 					DiceCount      int         `json:"diceCount" js:"diceCount"`
@@ -293,941 +283,868 @@ type Character struct {
 					DiceMultiplier interface{} `json:"diceMultiplier" js:"diceMultiplier"`
 					FixedValue     interface{} `json:"fixedValue" js:"fixedValue"`
 					DiceString     string      `json:"diceString" js:"diceString"`
-				} `json:"damage" js:"damage"`
-				DamageType  string      `json:"damageType" js:"damageType"`
-				FixedDamage interface{} `json:"fixedDamage" js:"fixedDamage"`
-				Properties  []struct {
+				} `json:"damage"`
+				DamageType       interface{}   `json:"damageType"`
+				Description      string        `json:"description"`
+				EntityTypeID     int           `json:"entityTypeId"`
+				FilterType       string        `json:"filterType"`
+				FixedDamage      interface{}   `json:"fixedDamage"`
+				GrantedModifiers []interface{} `json:"grantedModifiers"`
+				ID               int           `json:"id"`
+				IsConsumable     bool          `json:"isConsumable"`
+				IsHomebrew       bool          `json:"isHomebrew"`
+				IsMonkWeapon     bool          `json:"isMonkWeapon"`
+				IsPack           bool          `json:"isPack"`
+				LargeAvatarURL   interface{}   `json:"largeAvatarUrl"`
+				LongRange        interface{}   `json:"longRange"`
+				Magic            bool          `json:"magic"`
+				Name             string        `json:"name"`
+				Properties       []struct {
 					*js.Object
 
 					ID          int    `json:"id" js:"id"`
 					Name        string `json:"name" js:"name"`
 					Description string `json:"description" js:"description"`
 					Notes       string `json:"notes" js:"notes"`
-				} `json:"properties" js:"properties"`
-				AttackType            int           `json:"attackType" js:"attackType"`
-				CategoryID            int           `json:"categoryId" js:"categoryId"`
-				Range                 int           `json:"range" js:"range"`
-				LongRange             int           `json:"longRange" js:"longRange"`
-				IsMonkWeapon          bool          `json:"isMonkWeapon" js:"isMonkWeapon"`
-				WeaponBehaviors       []interface{} `json:"weaponBehaviors" js:"weaponBehaviors"`
-				ID                    int           `json:"id" js:"id"`
-				BaseTypeID            int           `json:"baseTypeId" js:"baseTypeId"`
-				EntityTypeID          int           `json:"entityTypeId" js:"entityTypeId"`
-				CanEquip              bool          `json:"canEquip" js:"canEquip"`
-				Magic                 bool          `json:"magic" js:"magic"`
-				Name                  string        `json:"name" js:"name"`
-				Snippet               interface{}   `json:"snippet" js:"snippet"`
-				Weight                float64       `json:"weight" js:"weight"`
-				Type                  string        `json:"type" js:"type"`
-				Description           string        `json:"description" js:"description"`
-				CanAttune             bool          `json:"canAttune" js:"canAttune"`
-				AttunementDescription interface{}   `json:"attunementDescription" js:"attunementDescription"`
-				Rarity                string        `json:"rarity" js:"rarity"`
-				IsHomebrew            bool          `json:"isHomebrew" js:"isHomebrew"`
-				Version               interface{}   `json:"version" js:"version"`
-				SourceID              interface{}   `json:"sourceId" js:"sourceId"`
-				SourcePageNumber      interface{}   `json:"sourcePageNumber" js:"sourcePageNumber"`
-				Stackable             bool          `json:"stackable" js:"stackable"`
-				BundleSize            int           `json:"bundleSize" js:"bundleSize"`
-				AvatarURL             interface{}   `json:"avatarUrl" js:"avatarUrl"`
-				LargeAvatarURL        interface{}   `json:"largeAvatarUrl" js:"largeAvatarUrl"`
-				FilterType            string        `json:"filterType" js:"filterType"`
-				Cost                  float64       `json:"cost" js:"cost"`
-				IsPack                bool          `json:"isPack" js:"isPack"`
-				LevelInfusionGranted  interface{}   `json:"levelInfusionGranted" js:"levelInfusionGranted"`
-				CanBeAddedToInventory bool          `json:"canBeAddedToInventory" js:"canBeAddedToInventory"`
-				GroupedID             interface{}   `json:"groupedId" js:"groupedId"`
-				Tags                  []string      `json:"tags" js:"tags"`
-				GrantedModifiers      []interface{} `json:"grantedModifiers" js:"grantedModifiers"`
-			} `json:"definition" js:"definition"`
-			Quantity   int         `json:"quantity" js:"quantity"`
-			IsAttuned  bool        `json:"isAttuned" js:"isAttuned"`
-			Equipped   bool        `json:"equipped" js:"equipped"`
-			LimitedUse interface{} `json:"limitedUse" js:"limitedUse"`
-		} `json:"inventory" js:"inventory"`
+				} `json:"properties"`
+				Range                interface{}   `json:"range"`
+				Rarity               string        `json:"rarity"`
+				Snippet              string        `json:"snippet"`
+				SourceID             interface{}   `json:"sourceId"`
+				SourcePageNumber     interface{}   `json:"sourcePageNumber"`
+				Stackable            bool          `json:"stackable"`
+				StealthCheck         int           `json:"stealthCheck"`
+				StrengthRequirement  int           `json:"strengthRequirement"`
+				SubType              interface{}   `json:"subType"`
+				Tags                 []string      `json:"tags"`
+				Type                 string        `json:"type"`
+				Version              interface{}   `json:"version"`
+				WeaponBehaviors      []interface{} `json:"weaponBehaviors"`
+				Weight               float64       `json:"weight"`
+				LevelInfusionGranted interface{}   `json:"levelInfusionGranted"`
+				Sources              []struct {
+					SourceID   int         `json:"sourceId"`
+					PageNumber interface{} `json:"pageNumber"`
+					SourceType int         `json:"sourceType"`
+				} `json:"sources"`
+				ArmorTypeID           interface{} `json:"armorTypeId"`
+				GearTypeID            int         `json:"gearTypeId"`
+				GroupedID             interface{} `json:"groupedId"`
+				CanBeAddedToInventory bool        `json:"canBeAddedToInventory"`
+			} `json:"definition"`
+			DefinitionID     int         `json:"definitionId"`
+			DefinitionTypeID int         `json:"definitionTypeId"`
+			DisplayAsAttack  interface{} `json:"displayAsAttack"`
+			EntityTypeID     int         `json:"entityTypeId"`
+			Equipped         bool        `json:"equipped"`
+			ID               int         `json:"id"`
+			IsAttuned        bool        `json:"isAttuned"`
+			LimitedUse       struct {
+				MaxUses              int    `json:"maxUses"`
+				NumberUsed           int    `json:"numberUsed"`
+				ResetType            string `json:"resetType"`
+				ResetTypeDescription string `json:"resetTypeDescription"`
+			} `json:"limitedUse"`
+			Quantity int `json:"quantity"`
+		} `json:"inventory"`
 		Currencies struct {
-			*js.Object
-
-			Cp int `json:"cp" js:"cp"`
-			Sp int `json:"sp" js:"sp"`
-			Gp int `json:"gp" js:"gp"`
-			Ep int `json:"ep" js:"ep"`
-			Pp int `json:"pp" js:"pp"`
-		} `json:"currencies" js:"currencies"`
+			Cp int `json:"cp"`
+			Ep int `json:"ep"`
+			Gp int `json:"gp"`
+			Pp int `json:"pp"`
+			Sp int `json:"sp"`
+		} `json:"currencies"`
 		Classes []struct {
-			*js.Object
-
-			ID              int  `json:"id" js:"id"`
-			EntityTypeID    int  `json:"entityTypeId" js:"entityTypeId"`
-			Level           int  `json:"level" js:"level"`
-			IsStartingClass bool `json:"isStartingClass" js:"isStartingClass"`
-			HitDiceUsed     int  `json:"hitDiceUsed" js:"hitDiceUsed"`
-			Definition      struct {
-				*js.Object
-
-				ID                    int         `json:"id" js:"id"`
-				Name                  string      `json:"name" js:"name"`
-				Description           string      `json:"description" js:"description"`
-				EquipmentDescription  string      `json:"equipmentDescription" js:"equipmentDescription"`
-				ParentClassID         interface{} `json:"parentClassId" js:"parentClassId"`
-				AvatarURL             string      `json:"avatarUrl" js:"avatarUrl"`
-				LargeAvatarURL        string      `json:"largeAvatarUrl" js:"largeAvatarUrl"`
-				PortraitAvatarURL     string      `json:"portraitAvatarUrl" js:"portraitAvatarUrl"`
-				MoreDetailsURL        string      `json:"moreDetailsUrl" js:"moreDetailsUrl"`
-				SpellCastingAbilityID int         `json:"spellCastingAbilityId" js:"spellCastingAbilityId"`
-				SourceIds             []int       `json:"sourceIds" js:"sourceIds"`
-				HitDice               int         `json:"hitDice" js:"hitDice"`
-				ClassFeatures         []struct {
-					*js.Object
-
-					ID            int         `json:"id" js:"id"`
-					Name          string      `json:"name" js:"name"`
-					Prerequisite  interface{} `json:"prerequisite" js:"prerequisite"`
-					Description   string      `json:"description" js:"description"`
-					RequiredLevel int         `json:"requiredLevel" js:"requiredLevel"`
-					DisplayOrder  int         `json:"displayOrder" js:"displayOrder"`
-				} `json:"classFeatures" js:"classFeatures"`
-				WealthDice struct {
-					*js.Object
-
-					DiceCount      int         `json:"diceCount" js:"diceCount"`
-					DiceValue      int         `json:"diceValue" js:"diceValue"`
-					DiceMultiplier int         `json:"diceMultiplier" js:"diceMultiplier"`
-					FixedValue     interface{} `json:"fixedValue" js:"fixedValue"`
-					DiceString     string      `json:"diceString" js:"diceString"`
-				} `json:"wealthDice" js:"wealthDice"`
-				CanCastSpells      bool        `json:"canCastSpells" js:"canCastSpells"`
-				KnowsAllSpells     bool        `json:"knowsAllSpells" js:"knowsAllSpells"`
-				SpellPrepareType   interface{} `json:"spellPrepareType" js:"spellPrepareType"`
-				SpellContainerName interface{} `json:"spellContainerName" js:"spellContainerName"`
-				SourceID           int         `json:"sourceId" js:"sourceId"`
-				SourcePageNumber   int         `json:"sourcePageNumber" js:"sourcePageNumber"`
-				PrimaryAbilities   []int       `json:"primaryAbilities" js:"primaryAbilities"`
-				SpellRules         struct {
-					*js.Object
-
-					MultiClassSpellSlotDivisor  int     `json:"multiClassSpellSlotDivisor" js:"multiClassSpellSlotDivisor"`
-					MultiClassSpellSlotRounding int     `json:"multiClassSpellSlotRounding" js:"multiClassSpellSlotRounding"`
-					IsRitualSpellCaster         bool    `json:"isRitualSpellCaster" js:"isRitualSpellCaster"`
-					LevelCantripsKnownMaxes     []int   `json:"levelCantripsKnownMaxes" js:"levelCantripsKnownMaxes"`
-					LevelSpellKnownMaxes        []int   `json:"levelSpellKnownMaxes" js:"levelSpellKnownMaxes"`
-					LevelSpellSlots             [][]int `json:"levelSpellSlots" js:"levelSpellSlots"`
-				} `json:"spellRules" js:"spellRules"`
-				Prerequisites []struct {
-					*js.Object
-
-					Description          string `json:"description" js:"description"`
-					PrerequisiteMappings []struct {
-						*js.Object
-
-						ID                  int    `json:"id" js:"id"`
-						EntityID            int    `json:"entityId" js:"entityId"`
-						EntityTypeID        int    `json:"entityTypeId" js:"entityTypeId"`
-						Type                string `json:"type" js:"type"`
-						SubType             string `json:"subType" js:"subType"`
-						Value               int    `json:"value" js:"value"`
-						FriendlyTypeName    string `json:"friendlyTypeName" js:"friendlyTypeName"`
-						FriendlySubTypeName string `json:"friendlySubTypeName" js:"friendlySubTypeName"`
-					} `json:"prerequisiteMappings" js:"prerequisiteMappings"`
-				} `json:"prerequisites" js:"prerequisites"`
-			} `json:"definition" js:"definition"`
-			SubclassDefinition struct {
-				*js.Object
-
-				ID                    int         `json:"id" js:"id"`
-				Name                  string      `json:"name" js:"name"`
-				Description           string      `json:"description" js:"description"`
-				EquipmentDescription  interface{} `json:"equipmentDescription" js:"equipmentDescription"`
-				ParentClassID         int         `json:"parentClassId" js:"parentClassId"`
-				AvatarURL             interface{} `json:"avatarUrl" js:"avatarUrl"`
-				LargeAvatarURL        interface{} `json:"largeAvatarUrl" js:"largeAvatarUrl"`
-				PortraitAvatarURL     interface{} `json:"portraitAvatarUrl" js:"portraitAvatarUrl"`
-				MoreDetailsURL        string      `json:"moreDetailsUrl" js:"moreDetailsUrl"`
-				SpellCastingAbilityID int         `json:"spellCastingAbilityId" js:"spellCastingAbilityId"`
-				SourceIds             []int       `json:"sourceIds" js:"sourceIds"`
-				HitDice               int         `json:"hitDice" js:"hitDice"`
-				ClassFeatures         []struct {
-					*js.Object
-
-					ID            int         `json:"id" js:"id"`
-					Name          string      `json:"name" js:"name"`
-					Prerequisite  interface{} `json:"prerequisite" js:"prerequisite"`
-					Description   string      `json:"description" js:"description"`
-					RequiredLevel int         `json:"requiredLevel" js:"requiredLevel"`
-					DisplayOrder  int         `json:"displayOrder" js:"displayOrder"`
-				} `json:"classFeatures" js:"classFeatures"`
-				WealthDice         interface{}   `json:"wealthDice" js:"wealthDice"`
-				CanCastSpells      bool          `json:"canCastSpells" js:"canCastSpells"`
-				KnowsAllSpells     bool          `json:"knowsAllSpells" js:"knowsAllSpells"`
-				SpellPrepareType   interface{}   `json:"spellPrepareType" js:"spellPrepareType"`
-				SpellContainerName interface{}   `json:"spellContainerName" js:"spellContainerName"`
-				SourceID           int           `json:"sourceId" js:"sourceId"`
-				SourcePageNumber   int           `json:"sourcePageNumber" js:"sourcePageNumber"`
-				PrimaryAbilities   []interface{} `json:"primaryAbilities" js:"primaryAbilities"`
-				SpellRules         interface{}   `json:"spellRules" js:"spellRules"`
-				Prerequisites      interface{}   `json:"prerequisites" js:"prerequisites"`
-			} `json:"subclassDefinition" js:"subclassDefinition"`
 			ClassFeatures []struct {
-				*js.Object
-
 				Definition struct {
-					*js.Object
-
-					ID           int    `json:"id" js:"id"`
-					EntityTypeID int    `json:"entityTypeId" js:"entityTypeId"`
-					DisplayOrder int    `json:"displayOrder" js:"displayOrder"`
-					Name         string `json:"name" js:"name"`
-					Description  string `json:"description" js:"description"`
-					Snippet      string `json:"snippet" js:"snippet"`
-					Activation   struct {
-						*js.Object
-
-						ActivationTime interface{} `json:"activationTime" js:"activationTime"`
-						ActivationType interface{} `json:"activationType" js:"activationType"`
-					} `json:"activation" js:"activation"`
-					MultiClassDescription string        `json:"multiClassDescription" js:"multiClassDescription"`
-					RequiredLevel         int           `json:"requiredLevel" js:"requiredLevel"`
-					IsSubClassFeature     bool          `json:"isSubClassFeature" js:"isSubClassFeature"`
-					LimitedUse            []interface{} `json:"limitedUse" js:"limitedUse"`
-					HideInBuilder         bool          `json:"hideInBuilder" js:"hideInBuilder"`
-					HideInSheet           bool          `json:"hideInSheet" js:"hideInSheet"`
-					SourceID              int           `json:"sourceId" js:"sourceId"`
-					SourcePageNumber      int           `json:"sourcePageNumber" js:"sourcePageNumber"`
-					CreatureRules         []interface{} `json:"creatureRules" js:"creatureRules"`
-					InfusionRules         []interface{} `json:"infusionRules" js:"infusionRules"`
-				} `json:"definition" js:"definition"`
-				LevelScale interface{} `json:"levelScale" js:"levelScale"`
-			} `json:"classFeatures" js:"classFeatures"`
-		} `json:"classes" js:"classes"`
-		Feats                    []interface{} `json:"feats" js:"feats"`
-		CustomDefenseAdjustments []interface{} `json:"customDefenseAdjustments" js:"customDefenseAdjustments"`
-		CustomSenses             []interface{} `json:"customSenses" js:"customSenses"`
-		CustomSpeeds             []interface{} `json:"customSpeeds" js:"customSpeeds"`
-		CustomProficiencies      []interface{} `json:"customProficiencies" js:"customProficiencies"`
-		SpellDefenses            interface{}   `json:"spellDefenses" js:"spellDefenses"`
+					DefinitionKey                 string        `json:"definitionKey"`
+					Activation                    interface{}   `json:"activation"`
+					CreatureRules                 []interface{} `json:"creatureRules"`
+					Description                   string        `json:"description"`
+					DisplayOrder                  int           `json:"displayOrder"`
+					EntityTypeID                  int           `json:"entityTypeId"`
+					HideInBuilder                 bool          `json:"hideInBuilder"`
+					HideInSheet                   bool          `json:"hideInSheet"`
+					ID                            int           `json:"id"`
+					IsSubClassFeature             bool          `json:"isSubClassFeature"`
+					LevelScales                   interface{}   `json:"levelScales"`
+					LimitedUse                    []interface{} `json:"limitedUse"`
+					MultiClassDescription         string        `json:"multiClassDescription"`
+					Name                          string        `json:"name"`
+					RequiredLevel                 int           `json:"requiredLevel"`
+					Snippet                       string        `json:"snippet"`
+					SourceID                      int           `json:"sourceId"`
+					SourcePageNumber              int           `json:"sourcePageNumber"`
+					InfusionRules                 []interface{} `json:"infusionRules"`
+					SpellListIds                  []interface{} `json:"spellListIds"`
+					ClassID                       int           `json:"classId"`
+					FeatureType                   int           `json:"featureType"`
+					Sources                       interface{}   `json:"sources"`
+					AffectedFeatureDefinitionKeys []interface{} `json:"affectedFeatureDefinitionKeys"`
+				} `json:"definition"`
+				LevelScale interface{} `json:"levelScale"`
+			} `json:"classFeatures"`
+			Definition struct {
+				AvatarURL               string      `json:"avatarUrl"`
+				CanCastSpells           bool        `json:"canCastSpells"`
+				ClassFeatureDefinitions interface{} `json:"classFeatureDefinitions"`
+				ClassFeatures           []struct {
+					Description   string      `json:"description"`
+					DisplayOrder  int         `json:"displayOrder"`
+					ID            int         `json:"id"`
+					Name          string      `json:"name"`
+					Prerequisite  interface{} `json:"prerequisite"`
+					RequiredLevel int         `json:"requiredLevel"`
+				} `json:"classFeatures"`
+				Description           string        `json:"description"`
+				EquipmentDescription  string        `json:"equipmentDescription"`
+				HitDice               int           `json:"hitDice"`
+				ID                    int           `json:"id"`
+				KnowsAllSpells        bool          `json:"knowsAllSpells"`
+				LargeAvatarURL        string        `json:"largeAvatarUrl"`
+				MoreDetailsURL        string        `json:"moreDetailsUrl"`
+				Name                  string        `json:"name"`
+				ParentClassID         interface{}   `json:"parentClassId"`
+				PortraitAvatarURL     string        `json:"portraitAvatarUrl"`
+				SourceID              interface{}   `json:"sourceId"`
+				SourceIds             []interface{} `json:"sourceIds"`
+				SourcePageNumber      int           `json:"sourcePageNumber"`
+				SpellCastingAbilityID int           `json:"spellCastingAbilityId"`
+				SpellContainerName    interface{}   `json:"spellContainerName"`
+				SpellPrepareType      interface{}   `json:"spellPrepareType"`
+				SubclassDefinition    interface{}   `json:"subclassDefinition"`
+				WealthDice            struct {
+					DiceCount      int         `json:"diceCount"`
+					DiceMultiplier int         `json:"diceMultiplier"`
+					DiceString     string      `json:"diceString"`
+					DiceValue      int         `json:"diceValue"`
+					FixedValue     interface{} `json:"fixedValue"`
+				} `json:"wealthDice"`
+				IsHomebrew bool `json:"isHomebrew"`
+				Sources    []struct {
+					SourceID   int `json:"sourceId"`
+					PageNumber int `json:"pageNumber"`
+					SourceType int `json:"sourceType"`
+				} `json:"sources"`
+				Prerequisites []struct {
+					Description          string `json:"description"`
+					PrerequisiteMappings []struct {
+						EntityID            int    `json:"entityId"`
+						EntityTypeID        int    `json:"entityTypeId"`
+						FriendlySubTypeName string `json:"friendlySubTypeName"`
+						FriendlyTypeName    string `json:"friendlyTypeName"`
+						ID                  int    `json:"id"`
+						SubType             string `json:"subType"`
+						Type                string `json:"type"`
+						Value               int    `json:"value"`
+					} `json:"prerequisiteMappings"`
+				} `json:"prerequisites"`
+				PrimaryAbilities []int `json:"primaryAbilities"`
+				SpellRules       struct {
+					IsRitualSpellCaster         bool    `json:"isRitualSpellCaster"`
+					LevelCantripsKnownMaxes     []int   `json:"levelCantripsKnownMaxes"`
+					LevelSpellKnownMaxes        []int   `json:"levelSpellKnownMaxes"`
+					LevelSpellSlots             [][]int `json:"levelSpellSlots"`
+					MultiClassSpellSlotDivisor  int     `json:"multiClassSpellSlotDivisor"`
+					MultiClassSpellSlotRounding int     `json:"multiClassSpellSlotRounding"`
+				} `json:"spellRules"`
+			} `json:"definition"`
+			DefinitionID       int  `json:"definitionId"`
+			EntityTypeID       int  `json:"entityTypeId"`
+			HitDiceUsed        int  `json:"hitDiceUsed"`
+			ID                 int  `json:"id"`
+			IsStartingClass    bool `json:"isStartingClass"`
+			Level              int  `json:"level"`
+			SubclassDefinition struct {
+				AvatarURL               interface{} `json:"avatarUrl"`
+				CanCastSpells           bool        `json:"canCastSpells"`
+				ClassFeatureDefinitions interface{} `json:"classFeatureDefinitions"`
+				ClassFeatures           []struct {
+					Description   string      `json:"description"`
+					DisplayOrder  int         `json:"displayOrder"`
+					ID            int         `json:"id"`
+					Name          string      `json:"name"`
+					Prerequisite  interface{} `json:"prerequisite"`
+					RequiredLevel int         `json:"requiredLevel"`
+				} `json:"classFeatures"`
+				Description           string        `json:"description"`
+				EquipmentDescription  interface{}   `json:"equipmentDescription"`
+				HitDice               int           `json:"hitDice"`
+				ID                    int           `json:"id"`
+				KnowsAllSpells        bool          `json:"knowsAllSpells"`
+				LargeAvatarURL        interface{}   `json:"largeAvatarUrl"`
+				MoreDetailsURL        string        `json:"moreDetailsUrl"`
+				Name                  string        `json:"name"`
+				ParentClassID         int           `json:"parentClassId"`
+				PortraitAvatarURL     interface{}   `json:"portraitAvatarUrl"`
+				SourceID              interface{}   `json:"sourceId"`
+				SourceIds             []interface{} `json:"sourceIds"`
+				SourcePageNumber      int           `json:"sourcePageNumber"`
+				SpellCastingAbilityID int           `json:"spellCastingAbilityId"`
+				SpellContainerName    interface{}   `json:"spellContainerName"`
+				SpellPrepareType      interface{}   `json:"spellPrepareType"`
+				SubclassDefinition    interface{}   `json:"subclassDefinition"`
+				WealthDice            interface{}   `json:"wealthDice"`
+				IsHomebrew            bool          `json:"isHomebrew"`
+				Sources               []struct {
+					SourceID   int `json:"sourceId"`
+					PageNumber int `json:"pageNumber"`
+					SourceType int `json:"sourceType"`
+				} `json:"sources"`
+				Prerequisites    interface{} `json:"prerequisites"`
+				PrimaryAbilities interface{} `json:"primaryAbilities"`
+				SpellRules       interface{} `json:"spellRules"`
+			} `json:"subclassDefinition"`
+			SubclassDefinitionID interface{} `json:"subclassDefinitionId"`
+		} `json:"classes"`
+		Feats                    []interface{} `json:"feats"`
+		CustomDefenseAdjustments []interface{} `json:"customDefenseAdjustments"`
+		CustomSenses             []interface{} `json:"customSenses"`
+		CustomSpeeds             []interface{} `json:"customSpeeds"`
+		CustomProficiencies      []interface{} `json:"customProficiencies"`
+		SpellDefenses            interface{}   `json:"spellDefenses"`
 		CustomActions            []struct {
-			*js.Object
-
-			ID                     int         `json:"id" js:"id"`
-			EntityTypeID           int         `json:"entityTypeId" js:"entityTypeId"`
-			Name                   string      `json:"name" js:"name"`
-			ToHitBonus             interface{} `json:"toHitBonus" js:"toHitBonus"`
-			Description            interface{} `json:"description" js:"description"`
-			Snippet                string      `json:"snippet" js:"snippet"`
-			IsProficient           bool        `json:"isProficient" js:"isProficient"`
-			IsOffhand              interface{} `json:"isOffhand" js:"isOffhand"`
-			StatID                 int         `json:"statId" js:"statId"`
-			RangeID                int         `json:"rangeId" js:"rangeId"`
-			DiceCount              int         `json:"diceCount" js:"diceCount"`
-			DiceType               int         `json:"diceType" js:"diceType"`
-			FixedValue             interface{} `json:"fixedValue" js:"fixedValue"`
-			DamageTypeID           int         `json:"damageTypeId" js:"damageTypeId"`
-			OnMissDescription      interface{} `json:"onMissDescription" js:"onMissDescription"`
-			SaveFailDescription    interface{} `json:"saveFailDescription" js:"saveFailDescription"`
-			SaveSuccessDescription interface{} `json:"saveSuccessDescription" js:"saveSuccessDescription"`
-			SaveStatID             int         `json:"saveStatId" js:"saveStatId"`
-			FixedSaveDc            interface{} `json:"fixedSaveDc" js:"fixedSaveDc"`
-			ActionType             int         `json:"actionType" js:"actionType"`
-			AttackSubtype          interface{} `json:"attackSubtype" js:"attackSubtype"`
-			Range                  interface{} `json:"range" js:"range"`
-			LongRange              interface{} `json:"longRange" js:"longRange"`
-			AoeType                int         `json:"aoeType" js:"aoeType"`
-			AoeSize                interface{} `json:"aoeSize" js:"aoeSize"`
-			ActivationTime         interface{} `json:"activationTime" js:"activationTime"`
-			ActivationType         int         `json:"activationType" js:"activationType"`
-			IsSilvered             bool        `json:"isSilvered" js:"isSilvered"`
-			DamageBonus            interface{} `json:"damageBonus" js:"damageBonus"`
-			IsMartialArts          bool        `json:"isMartialArts" js:"isMartialArts"`
-			SpellRangeType         interface{} `json:"spellRangeType" js:"spellRangeType"`
-			DisplayAsAttack        interface{} `json:"displayAsAttack" js:"displayAsAttack"`
-		} `json:"customActions" js:"customActions"`
+			ActionType             int         `json:"actionType"`
+			ActivationTime         interface{} `json:"activationTime"`
+			ActivationType         int         `json:"activationType"`
+			AoeSize                interface{} `json:"aoeSize"`
+			AoeType                int         `json:"aoeType"`
+			AttackSubtype          interface{} `json:"attackSubtype"`
+			DamageBonus            interface{} `json:"damageBonus"`
+			DamageTypeID           int         `json:"damageTypeId"`
+			Description            interface{} `json:"description"`
+			DiceCount              int         `json:"diceCount"`
+			DiceType               int         `json:"diceType"`
+			DisplayAsAttack        interface{} `json:"displayAsAttack"`
+			EntityTypeID           string      `json:"entityTypeId"`
+			FixedSaveDc            interface{} `json:"fixedSaveDc"`
+			FixedValue             interface{} `json:"fixedValue"`
+			ID                     string      `json:"id"`
+			IsMartialArts          bool        `json:"isMartialArts"`
+			IsOffhand              interface{} `json:"isOffhand"`
+			IsProficient           bool        `json:"isProficient"`
+			IsSilvered             bool        `json:"isSilvered"`
+			LongRange              interface{} `json:"longRange"`
+			Name                   string      `json:"name"`
+			OnMissDescription      interface{} `json:"onMissDescription"`
+			Range                  interface{} `json:"range"`
+			RangeID                int         `json:"rangeId"`
+			SaveFailDescription    interface{} `json:"saveFailDescription"`
+			SaveStatID             int         `json:"saveStatId"`
+			SaveSuccessDescription interface{} `json:"saveSuccessDescription"`
+			Snippet                string      `json:"snippet"`
+			SpellRangeType         interface{} `json:"spellRangeType"`
+			StatID                 int         `json:"statId"`
+			ToHitBonus             interface{} `json:"toHitBonus"`
+		} `json:"customActions"`
 		CharacterValues []struct {
-			*js.Object
-
-			TypeID        int         `json:"typeId" js:"typeId"`
-			Value         bool        `json:"value" js:"value"`
-			Notes         interface{} `json:"notes" js:"notes"`
-			ValueID       int         `json:"valueId" js:"valueId"`
-			ValueTypeID   int         `json:"valueTypeId" js:"valueTypeId"`
-			ContextID     interface{} `json:"contextId" js:"contextId"`
-			ContextTypeID interface{} `json:"contextTypeId" js:"contextTypeId"`
-		} `json:"characterValues" js:"characterValues"`
+			ContextID     interface{} `json:"contextId"`
+			ContextTypeID interface{} `json:"contextTypeId"`
+			Notes         interface{} `json:"notes"`
+			TypeID        int         `json:"typeId"`
+			Value         bool        `json:"value"`
+			ValueID       string      `json:"valueId"`
+			ValueTypeID   string      `json:"valueTypeId"`
+		} `json:"characterValues"`
 		Conditions []struct {
-			*js.Object
-
-			ID    int         `json:"id" js:"id"`
-			Level interface{} `json:"level" js:"level"`
-		} `json:"conditions" js:"conditions"`
+			ID    int         `json:"id"`
+			Level interface{} `json:"level"`
+		} `json:"conditions"`
 		DeathSaves struct {
-			*js.Object
-
-			FailCount    interface{} `json:"failCount" js:"failCount"`
-			SuccessCount interface{} `json:"successCount" js:"successCount"`
-			IsStabilized bool        `json:"isStabilized" js:"isStabilized"`
-		} `json:"deathSaves" js:"deathSaves"`
-		AdjustmentXp interface{} `json:"adjustmentXp" js:"adjustmentXp"`
+			FailCount    interface{} `json:"failCount"`
+			IsStabilized bool        `json:"isStabilized"`
+			SuccessCount interface{} `json:"successCount"`
+		} `json:"deathSaves"`
+		AdjustmentXp interface{} `json:"adjustmentXp"`
 		SpellSlots   []struct {
-			*js.Object
-
-			Level     int `json:"level" js:"level"`
-			Used      int `json:"used" js:"used"`
-			Available int `json:"available" js:"available"`
-		} `json:"spellSlots" js:"spellSlots"`
+			Available int `json:"available"`
+			Level     int `json:"level"`
+			Used      int `json:"used"`
+		} `json:"spellSlots"`
 		PactMagic []struct {
-			*js.Object
-
-			Level     int `json:"level" js:"level"`
-			Used      int `json:"used" js:"used"`
-			Available int `json:"available" js:"available"`
-		} `json:"pactMagic" js:"pactMagic"`
-		ActiveSourceCategories []int `json:"activeSourceCategories" js:"activeSourceCategories"`
+			Available int `json:"available"`
+			Level     int `json:"level"`
+			Used      int `json:"used"`
+		} `json:"pactMagic"`
+		ActiveSourceCategories []int `json:"activeSourceCategories"`
 		Spells                 struct {
-			*js.Object
-
-			Race  []interface{} `json:"race" js:"race"`
-			Class []interface{} `json:"class" js:"class"`
-			Item  []struct {
-				*js.Object
-
-				OverrideSaveDc int `json:"overrideSaveDc" js:"overrideSaveDc"`
-				LimitedUse     struct {
-					*js.Object
-
-					MinNumberConsumed int `json:"minNumberConsumed" js:"minNumberConsumed"`
-					MaxNumberConsumed int `json:"maxNumberConsumed" js:"maxNumberConsumed"`
-				} `json:"limitedUse" js:"limitedUse"`
-				ID           int `json:"id" js:"id"`
-				EntityTypeID int `json:"entityTypeId" js:"entityTypeId"`
-				Definition   struct {
-					*js.Object
-
-					ID       int    `json:"id" js:"id"`
-					Name     string `json:"name" js:"name"`
-					Level    int    `json:"level" js:"level"`
-					School   string `json:"school" js:"school"`
-					Duration struct {
-						*js.Object
-
-						DurationInterval int    `json:"durationInterval" js:"durationInterval"`
-						DurationUnit     string `json:"durationUnit" js:"durationUnit"`
-						DurationType     string `json:"durationType" js:"durationType"`
-					} `json:"duration" js:"duration"`
-					Activation struct {
-						*js.Object
-
-						ActivationTime int `json:"activationTime" js:"activationTime"`
-						ActivationType int `json:"activationType" js:"activationType"`
-					} `json:"activation" js:"activation"`
-					Range struct {
-						*js.Object
-
-						Origin     string `json:"origin" js:"origin"`
-						RangeValue int    `json:"rangeValue" js:"rangeValue"`
-						AoeType    string `json:"aoeType" js:"aoeType"`
-						AoeValue   int    `json:"aoeValue" js:"aoeValue"`
-					} `json:"range" js:"range"`
-					AsPartOfWeaponAttack  bool        `json:"asPartOfWeaponAttack" js:"asPartOfWeaponAttack"`
-					Description           string      `json:"description" js:"description"`
-					Snippet               string      `json:"snippet" js:"snippet"`
-					Concentration         bool        `json:"concentration" js:"concentration"`
-					Ritual                bool        `json:"ritual" js:"ritual"`
-					RangeArea             interface{} `json:"rangeArea" js:"rangeArea"`
-					DamageEffect          interface{} `json:"damageEffect" js:"damageEffect"`
-					Components            []int       `json:"components" js:"components"`
-					ComponentsDescription string      `json:"componentsDescription" js:"componentsDescription"`
-					SaveDcAbilityID       int         `json:"saveDcAbilityId" js:"saveDcAbilityId"`
-					Healing               interface{} `json:"healing" js:"healing"`
-					HealingDice           interface{} `json:"healingDice" js:"healingDice"`
-					TempHpDice            interface{} `json:"tempHpDice" js:"tempHpDice"`
-					AttackType            interface{} `json:"attackType" js:"attackType"`
-					CanCastAtHigherLevel  bool        `json:"canCastAtHigherLevel" js:"canCastAtHigherLevel"`
-					IsHomebrew            bool        `json:"isHomebrew" js:"isHomebrew"`
-					Version               interface{} `json:"version" js:"version"`
-					SourceID              int         `json:"sourceId" js:"sourceId"`
-					SourcePageNumber      int         `json:"sourcePageNumber" js:"sourcePageNumber"`
-					RequiresSavingThrow   bool        `json:"requiresSavingThrow" js:"requiresSavingThrow"`
-					RequiresAttackRoll    bool        `json:"requiresAttackRoll" js:"requiresAttackRoll"`
-					AtHigherLevels        struct {
-						*js.Object
-
-						ScaleType              interface{}   `json:"scaleType" js:"scaleType"`
-						HigherLevelDefinitions []interface{} `json:"higherLevelDefinitions" js:"higherLevelDefinitions"`
-						AdditionalAttacks      []interface{} `json:"additionalAttacks" js:"additionalAttacks"`
-						AdditionalTargets      []interface{} `json:"additionalTargets" js:"additionalTargets"`
-						AreaOfEffect           []interface{} `json:"areaOfEffect" js:"areaOfEffect"`
-						Duration               []interface{} `json:"duration" js:"duration"`
-						Creatures              []interface{} `json:"creatures" js:"creatures"`
-						Special                []interface{} `json:"special" js:"special"`
-						Points                 []interface{} `json:"points" js:"points"`
-					} `json:"atHigherLevels" js:"atHigherLevels"`
-					Modifiers  []interface{} `json:"modifiers" js:"modifiers"`
-					Conditions []struct {
-						*js.Object
-
-						Type              int    `json:"type" js:"type"`
-						ConditionID       int    `json:"conditionId" js:"conditionId"`
-						ConditionDuration int    `json:"conditionDuration" js:"conditionDuration"`
-						DurationUnit      string `json:"durationUnit" js:"durationUnit"`
-						Exception         string `json:"exception" js:"exception"`
-					} `json:"conditions" js:"conditions"`
-					Tags                   []string `json:"tags" js:"tags"`
-					CastingTimeDescription string   `json:"castingTimeDescription" js:"castingTimeDescription"`
-				} `json:"definition" js:"definition"`
-				Prepared              interface{} `json:"prepared" js:"prepared"`
-				CountsAsKnownSpell    interface{} `json:"countsAsKnownSpell" js:"countsAsKnownSpell"`
-				UsesSpellSlot         interface{} `json:"usesSpellSlot" js:"usesSpellSlot"`
-				CastAtLevel           interface{} `json:"castAtLevel" js:"castAtLevel"`
-				AlwaysPrepared        interface{} `json:"alwaysPrepared" js:"alwaysPrepared"`
-				Restriction           interface{} `json:"restriction" js:"restriction"`
-				SpellCastingAbilityID interface{} `json:"spellCastingAbilityId" js:"spellCastingAbilityId"`
-				DisplayAsAttack       bool        `json:"displayAsAttack" js:"displayAsAttack"`
-				AdditionalDescription interface{} `json:"additionalDescription" js:"additionalDescription"`
-				CastOnlyAsRitual      bool        `json:"castOnlyAsRitual" js:"castOnlyAsRitual"`
-				RitualCastingType     interface{} `json:"ritualCastingType" js:"ritualCastingType"`
-				Range                 struct {
-					*js.Object
-
-					Origin     string `json:"origin" js:"origin"`
-					RangeValue int    `json:"rangeValue" js:"rangeValue"`
-					AoeType    string `json:"aoeType" js:"aoeType"`
-					AoeValue   int    `json:"aoeValue" js:"aoeValue"`
-				} `json:"range" js:"range"`
+			Background interface{}   `json:"background"`
+			Class      []interface{} `json:"class"`
+			Feat       []interface{} `json:"feat"`
+			Item       []struct {
 				Activation struct {
-					*js.Object
-
-					ActivationTime int `json:"activationTime" js:"activationTime"`
-					ActivationType int `json:"activationType" js:"activationType"`
-				} `json:"activation" js:"activation"`
-				BaseLevelAtWill       bool        `json:"baseLevelAtWill" js:"baseLevelAtWill"`
-				AtWillLimitedUseLevel interface{} `json:"atWillLimitedUseLevel" js:"atWillLimitedUseLevel"`
-				ComponentID           int         `json:"componentId" js:"componentId"`
-				ComponentTypeID       int         `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"item" js:"item"`
-			Feat []interface{} `json:"feat" js:"feat"`
-		} `json:"spells" js:"spells"`
+					ActivationTime int `json:"activationTime"`
+					ActivationType int `json:"activationType"`
+				} `json:"activation"`
+				AdditionalDescription interface{} `json:"additionalDescription"`
+				AlwaysPrepared        bool        `json:"alwaysPrepared"`
+				AtWillLimitedUseLevel interface{} `json:"atWillLimitedUseLevel"`
+				BaseLevelAtWill       bool        `json:"baseLevelAtWill"`
+				CastAtLevel           interface{} `json:"castAtLevel"`
+				CastOnlyAsRitual      bool        `json:"castOnlyAsRitual"`
+				ComponentID           int         `json:"componentId"`
+				ComponentTypeID       int         `json:"componentTypeId"`
+				CountsAsKnownSpell    interface{} `json:"countsAsKnownSpell"`
+				Definition            struct {
+					Activation struct {
+						ActivationTime int `json:"activationTime"`
+						ActivationType int `json:"activationType"`
+					} `json:"activation"`
+					AsPartOfWeaponAttack bool `json:"asPartOfWeaponAttack"`
+					AtHigherLevels       struct {
+						AdditionalAttacks      []interface{} `json:"additionalAttacks"`
+						AdditionalTargets      []interface{} `json:"additionalTargets"`
+						AreaOfEffect           []interface{} `json:"areaOfEffect"`
+						Creatures              []interface{} `json:"creatures"`
+						Duration               []interface{} `json:"duration"`
+						HigherLevelDefinitions []interface{} `json:"higherLevelDefinitions"`
+						Points                 []interface{} `json:"points"`
+						ScaleType              interface{}   `json:"scaleType"`
+						Special                []interface{} `json:"special"`
+					} `json:"atHigherLevels"`
+					AttackType             interface{} `json:"attackType"`
+					CanCastAtHigherLevel   bool        `json:"canCastAtHigherLevel"`
+					CastingTimeDescription string      `json:"castingTimeDescription"`
+					Components             []int       `json:"components"`
+					ComponentsDescription  string      `json:"componentsDescription"`
+					Concentration          bool        `json:"concentration"`
+					Conditions             []struct {
+						ConditionDuration int    `json:"conditionDuration"`
+						ConditionID       int    `json:"conditionId"`
+						DurationUnit      string `json:"durationUnit"`
+						Exception         string `json:"exception"`
+						Type              int    `json:"type"`
+					} `json:"conditions"`
+					DamageEffect interface{} `json:"damageEffect"`
+					Description  string      `json:"description"`
+					Duration     struct {
+						DurationInterval int    `json:"durationInterval"`
+						DurationUnit     string `json:"durationUnit"`
+						DurationType     string `json:"durationType"`
+					} `json:"duration"`
+					Healing     interface{}   `json:"healing"`
+					HealingDice []interface{} `json:"healingDice"`
+					ID          int           `json:"id"`
+					IsHomebrew  bool          `json:"isHomebrew"`
+					Level       int           `json:"level"`
+					Modifiers   []interface{} `json:"modifiers"`
+					Name        string        `json:"name"`
+					Range       struct {
+						AoeType    string `json:"aoeType"`
+						AoeValue   int    `json:"aoeValue"`
+						Origin     string `json:"origin"`
+						RangeValue int    `json:"rangeValue"`
+					} `json:"range"`
+					RangeArea           interface{}   `json:"rangeArea"`
+					RequiresAttackRoll  bool          `json:"requiresAttackRoll"`
+					RequiresSavingThrow bool          `json:"requiresSavingThrow"`
+					Ritual              bool          `json:"ritual"`
+					SaveDcAbilityID     int           `json:"saveDcAbilityId"`
+					School              string        `json:"school"`
+					Snippet             string        `json:"snippet"`
+					SourceID            interface{}   `json:"sourceId"`
+					SourcePageNumber    int           `json:"sourcePageNumber"`
+					Tags                []string      `json:"tags"`
+					TempHpDice          []interface{} `json:"tempHpDice"`
+					Version             interface{}   `json:"version"`
+					Sources             []struct {
+						SourceID   int         `json:"sourceId"`
+						PageNumber interface{} `json:"pageNumber"`
+						SourceType int         `json:"sourceType"`
+					} `json:"sources"`
+					ScaleType interface{} `json:"scaleType"`
+				} `json:"definition"`
+				DefinitionID     int         `json:"definitionId"`
+				DisplayAsAttack  bool        `json:"displayAsAttack"`
+				EntityTypeID     int         `json:"entityTypeId"`
+				ID               int         `json:"id"`
+				IsSignatureSpell interface{} `json:"isSignatureSpell"`
+				LimitedUse       struct {
+					MaxNumberConsumed  int         `json:"maxNumberConsumed"`
+					MaxUses            int         `json:"maxUses"`
+					MinNumberConsumed  int         `json:"minNumberConsumed"`
+					Name               interface{} `json:"name"`
+					NumberUsed         int         `json:"numberUsed"`
+					ResetType          interface{} `json:"resetType"`
+					StatModifierUsesID interface{} `json:"statModifierUsesId"`
+					Operator           interface{} `json:"operator"`
+					ResetDice          interface{} `json:"resetDice"`
+				} `json:"limitedUse"`
+				OverrideSaveDc int  `json:"overrideSaveDc"`
+				Prepared       bool `json:"prepared"`
+				Range          struct {
+					AoeType    string `json:"aoeType"`
+					AoeValue   int    `json:"aoeValue"`
+					Origin     string `json:"origin"`
+					RangeValue int    `json:"rangeValue"`
+				} `json:"range"`
+				Restriction           interface{} `json:"restriction"`
+				RitualCastingType     interface{} `json:"ritualCastingType"`
+				SpellCastingAbilityID interface{} `json:"spellCastingAbilityId"`
+				UsesSpellSlot         bool        `json:"usesSpellSlot"`
+				SpellListID           interface{} `json:"spellListId"`
+			} `json:"item"`
+			Race []interface{} `json:"race"`
+		} `json:"spells"`
 		Options struct {
-			*js.Object
-
-			Race  []interface{} `json:"race" js:"race"`
-			Class []struct {
-				*js.Object
-
-				Definition struct {
-					*js.Object
-
-					ID           int    `json:"id" js:"id"`
-					EntityTypeID int    `json:"entityTypeId" js:"entityTypeId"`
-					Name         string `json:"name" js:"name"`
-					Description  string `json:"description" js:"description"`
-					Snippet      string `json:"snippet" js:"snippet"`
-					Activation   struct {
-						*js.Object
-
-						ActivationTime interface{} `json:"activationTime" js:"activationTime"`
-						ActivationType interface{} `json:"activationType" js:"activationType"`
-					} `json:"activation" js:"activation"`
-					SourceID         int           `json:"sourceId" js:"sourceId"`
-					SourcePageNumber interface{}   `json:"sourcePageNumber" js:"sourcePageNumber"`
-					CreatureRules    []interface{} `json:"creatureRules" js:"creatureRules"`
-				} `json:"definition" js:"definition"`
-				ComponentID     int `json:"componentId" js:"componentId"`
-				ComponentTypeID int `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"class" js:"class"`
-			Feat []interface{} `json:"feat" js:"feat"`
-		} `json:"options" js:"options"`
+			Background interface{} `json:"background"`
+			Class      []struct {
+				ComponentID     int `json:"componentId"`
+				ComponentTypeID int `json:"componentTypeId"`
+				Definition      struct {
+					Activation       interface{}   `json:"activation"`
+					CreatureRules    []interface{} `json:"creatureRules"`
+					Description      string        `json:"description"`
+					EntityTypeID     int           `json:"entityTypeId"`
+					ID               int           `json:"id"`
+					Name             string        `json:"name"`
+					Snippet          string        `json:"snippet"`
+					SourceID         int           `json:"sourceId"`
+					SourcePageNumber interface{}   `json:"sourcePageNumber"`
+					SpellListIds     []interface{} `json:"spellListIds"`
+				} `json:"definition"`
+			} `json:"class"`
+			Feat []interface{} `json:"feat"`
+			Item interface{}   `json:"item"`
+			Race []interface{} `json:"race"`
+		} `json:"options"`
 		Choices struct {
-			*js.Object
-
-			Race []struct {
-				*js.Object
-
-				ID              string        `json:"id" js:"id"`
-				ParentChoiceID  interface{}   `json:"parentChoiceId" js:"parentChoiceId"`
-				Type            int           `json:"type" js:"type"`
-				SubType         int           `json:"subType" js:"subType"`
-				OptionValue     int           `json:"optionValue" js:"optionValue"`
-				Label           string        `json:"label" js:"label"`
-				IsOptional      bool          `json:"isOptional" js:"isOptional"`
-				IsInfinite      bool          `json:"isInfinite" js:"isInfinite"`
-				DefaultSubtypes []interface{} `json:"defaultSubtypes" js:"defaultSubtypes"`
-				Options         []struct {
-					*js.Object
-
-					ID          int         `json:"id" js:"id"`
-					Label       string      `json:"label" js:"label"`
-					Description interface{} `json:"description" js:"description"`
-				} `json:"options" js:"options"`
-				ComponentID     int `json:"componentId" js:"componentId"`
-				ComponentTypeID int `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"race" js:"race"`
-			Class []struct {
-				*js.Object
-
-				ID              string        `json:"id" js:"id"`
-				ParentChoiceID  interface{}   `json:"parentChoiceId" js:"parentChoiceId"`
-				Type            int           `json:"type" js:"type"`
-				SubType         interface{}   `json:"subType" js:"subType"`
-				OptionValue     int           `json:"optionValue" js:"optionValue"`
-				Label           interface{}   `json:"label" js:"label"`
-				IsOptional      bool          `json:"isOptional" js:"isOptional"`
-				IsInfinite      bool          `json:"isInfinite" js:"isInfinite"`
-				DefaultSubtypes []interface{} `json:"defaultSubtypes" js:"defaultSubtypes"`
-				Options         []struct {
-					*js.Object
-
-					ID          int    `json:"id" js:"id"`
-					Label       string `json:"label" js:"label"`
-					Description string `json:"description" js:"description"`
-				} `json:"options" js:"options"`
-				ComponentID     int `json:"componentId" js:"componentId"`
-				ComponentTypeID int `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"class" js:"class"`
 			Background []struct {
-				*js.Object
-
-				ID              string        `json:"id" js:"id"`
-				ParentChoiceID  interface{}   `json:"parentChoiceId" js:"parentChoiceId"`
-				Type            int           `json:"type" js:"type"`
-				SubType         int           `json:"subType" js:"subType"`
-				OptionValue     int           `json:"optionValue" js:"optionValue"`
-				Label           string        `json:"label" js:"label"`
-				IsOptional      bool          `json:"isOptional" js:"isOptional"`
-				IsInfinite      bool          `json:"isInfinite" js:"isInfinite"`
-				DefaultSubtypes []interface{} `json:"defaultSubtypes" js:"defaultSubtypes"`
+				ComponentID     int      `json:"componentId"`
+				ComponentTypeID int      `json:"componentTypeId"`
+				DefaultSubtypes []string `json:"defaultSubtypes"`
+				ID              string   `json:"id"`
+				IsInfinite      bool     `json:"isInfinite"`
+				IsOptional      bool     `json:"isOptional"`
+				Label           string   `json:"label"`
 				Options         []struct {
-					*js.Object
-
-					ID          int         `json:"id" js:"id"`
-					Label       string      `json:"label" js:"label"`
-					Description interface{} `json:"description" js:"description"`
-				} `json:"options" js:"options"`
-				ComponentID     int `json:"componentId" js:"componentId"`
-				ComponentTypeID int `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"background" js:"background"`
-			Feat []interface{} `json:"feat" js:"feat"`
-		} `json:"choices" js:"choices"`
+					Description interface{} `json:"description"`
+					ID          int         `json:"id"`
+					Label       string      `json:"label"`
+				} `json:"options"`
+				OptionValue    int         `json:"optionValue"`
+				ParentChoiceID interface{} `json:"parentChoiceId"`
+				SubType        int         `json:"subType"`
+				Type           int         `json:"type"`
+				DisplayOrder   interface{} `json:"displayOrder"`
+			} `json:"background"`
+			Class []struct {
+				ComponentID     int           `json:"componentId"`
+				ComponentTypeID int           `json:"componentTypeId"`
+				DefaultSubtypes []interface{} `json:"defaultSubtypes"`
+				ID              string        `json:"id"`
+				IsInfinite      bool          `json:"isInfinite"`
+				IsOptional      bool          `json:"isOptional"`
+				Label           interface{}   `json:"label"`
+				Options         []struct {
+					Description string `json:"description"`
+					ID          int    `json:"id"`
+					Label       string `json:"label"`
+				} `json:"options"`
+				OptionValue    int         `json:"optionValue"`
+				ParentChoiceID interface{} `json:"parentChoiceId"`
+				SubType        interface{} `json:"subType"`
+				Type           int         `json:"type"`
+				DisplayOrder   interface{} `json:"displayOrder"`
+			} `json:"class"`
+			Feat []interface{} `json:"feat"`
+			Item interface{}   `json:"item"`
+			Race []struct {
+				ComponentID     int           `json:"componentId"`
+				ComponentTypeID int           `json:"componentTypeId"`
+				DefaultSubtypes []interface{} `json:"defaultSubtypes"`
+				ID              string        `json:"id"`
+				IsInfinite      bool          `json:"isInfinite"`
+				IsOptional      bool          `json:"isOptional"`
+				Label           string        `json:"label"`
+				Options         []struct {
+					Description interface{} `json:"description"`
+					ID          int         `json:"id"`
+					Label       string      `json:"label"`
+				} `json:"options"`
+				OptionValue    int         `json:"optionValue"`
+				ParentChoiceID interface{} `json:"parentChoiceId"`
+				SubType        int         `json:"subType"`
+				Type           int         `json:"type"`
+				DisplayOrder   interface{} `json:"displayOrder"`
+			} `json:"race"`
+		} `json:"choices"`
 		Actions struct {
-			*js.Object
-
-			Race  []interface{} `json:"race" js:"race"`
-			Class []struct {
-				*js.Object
-
-				ID           int `json:"id" js:"id"`
-				EntityTypeID int `json:"entityTypeId" js:"entityTypeId"`
-				LimitedUse   struct {
-					*js.Object
-
-					Name               interface{} `json:"name" js:"name"`
-					StatModifierUsesID interface{} `json:"statModifierUsesId" js:"statModifierUsesId"`
-					ResetType          int         `json:"resetType" js:"resetType"`
-					NumberUsed         int         `json:"numberUsed" js:"numberUsed"`
-					MinNumberConsumed  int         `json:"minNumberConsumed" js:"minNumberConsumed"`
-					MaxNumberConsumed  int         `json:"maxNumberConsumed" js:"maxNumberConsumed"`
-					MaxUses            int         `json:"maxUses" js:"maxUses"`
-					Operator           int         `json:"operator" js:"operator"`
-				} `json:"limitedUse" js:"limitedUse"`
-				Name                   string      `json:"name" js:"name"`
-				Description            string      `json:"description" js:"description"`
-				Snippet                string      `json:"snippet" js:"snippet"`
-				AbilityModifierStatID  interface{} `json:"abilityModifierStatId" js:"abilityModifierStatId"`
-				OnMissDescription      string      `json:"onMissDescription" js:"onMissDescription"`
-				SaveFailDescription    string      `json:"saveFailDescription" js:"saveFailDescription"`
-				SaveSuccessDescription string      `json:"saveSuccessDescription" js:"saveSuccessDescription"`
-				SaveStatID             interface{} `json:"saveStatId" js:"saveStatId"`
-				FixedSaveDc            interface{} `json:"fixedSaveDc" js:"fixedSaveDc"`
-				AttackTypeRange        interface{} `json:"attackTypeRange" js:"attackTypeRange"`
-				ActionType             int         `json:"actionType" js:"actionType"`
-				AttackSubtype          interface{} `json:"attackSubtype" js:"attackSubtype"`
-				Dice                   interface{} `json:"dice" js:"dice"`
-				Value                  interface{} `json:"value" js:"value"`
-				DamageTypeID           interface{} `json:"damageTypeId" js:"damageTypeId"`
-				IsMartialArts          bool        `json:"isMartialArts" js:"isMartialArts"`
-				IsProficient           bool        `json:"isProficient" js:"isProficient"`
-				SpellRangeType         interface{} `json:"spellRangeType" js:"spellRangeType"`
-				DisplayAsAttack        interface{} `json:"displayAsAttack" js:"displayAsAttack"`
-				Range                  struct {
-					*js.Object
-
-					Range                    interface{} `json:"range" js:"range"`
-					LongRange                interface{} `json:"longRange" js:"longRange"`
-					AoeType                  interface{} `json:"aoeType" js:"aoeType"`
-					AoeSize                  interface{} `json:"aoeSize" js:"aoeSize"`
-					HasAoeSpecialDescription bool        `json:"hasAoeSpecialDescription" js:"hasAoeSpecialDescription"`
-				} `json:"range" js:"range"`
-				Activation struct {
-					*js.Object
-
-					ActivationTime int `json:"activationTime" js:"activationTime"`
-					ActivationType int `json:"activationType" js:"activationType"`
-				} `json:"activation" js:"activation"`
-				AttackCustomData struct {
-					*js.Object
-
-					Name            interface{} `json:"name" js:"name"`
-					Notes           interface{} `json:"notes" js:"notes"`
-					DamageBonus     interface{} `json:"damageBonus" js:"damageBonus"`
-					ToHitBonus      interface{} `json:"toHitBonus" js:"toHitBonus"`
-					ToHit           interface{} `json:"toHit" js:"toHit"`
-					IsOffhand       interface{} `json:"isOffhand" js:"isOffhand"`
-					IsSilver        interface{} `json:"isSilver" js:"isSilver"`
-					IsAdamantine    interface{} `json:"isAdamantine" js:"isAdamantine"`
-					IsProficient    interface{} `json:"isProficient" js:"isProficient"`
-					SaveDcBonus     interface{} `json:"saveDcBonus" js:"saveDcBonus"`
-					SaveDc          interface{} `json:"saveDc" js:"saveDc"`
-					Weight          interface{} `json:"weight" js:"weight"`
-					DisplayAsAttack interface{} `json:"displayAsAttack" js:"displayAsAttack"`
-					Cost            interface{} `json:"cost" js:"cost"`
-				} `json:"attackCustomData" js:"attackCustomData"`
-				ComponentID     int `json:"componentId" js:"componentId"`
-				ComponentTypeID int `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"class" js:"class"`
-			Feat []interface{} `json:"feat" js:"feat"`
-		} `json:"actions" js:"actions"`
+			Background interface{} `json:"background"`
+			Class      []struct {
+				AbilityModifierStatID interface{} `json:"abilityModifierStatId"`
+				ActionType            int         `json:"actionType"`
+				Activation            struct {
+					ActivationTime int `json:"activationTime"`
+					ActivationType int `json:"activationType"`
+				} `json:"activation"`
+				AttackSubtype   interface{} `json:"attackSubtype"`
+				AttackTypeRange interface{} `json:"attackTypeRange"`
+				ComponentID     int         `json:"componentId"`
+				ComponentTypeID int         `json:"componentTypeId"`
+				DamageTypeID    interface{} `json:"damageTypeId"`
+				Description     string      `json:"description"`
+				Dice            interface{} `json:"dice"`
+				DisplayAsAttack interface{} `json:"displayAsAttack"`
+				EntityTypeID    string      `json:"entityTypeId"`
+				FixedSaveDc     interface{} `json:"fixedSaveDc"`
+				FixedToHit      interface{} `json:"fixedToHit"`
+				ID              string      `json:"id"`
+				IsMartialArts   bool        `json:"isMartialArts"`
+				IsProficient    bool        `json:"isProficient"`
+				LimitedUse      struct {
+					MaxNumberConsumed  int         `json:"maxNumberConsumed"`
+					MaxUses            int         `json:"maxUses"`
+					MinNumberConsumed  int         `json:"minNumberConsumed"`
+					Name               interface{} `json:"name"`
+					NumberUsed         int         `json:"numberUsed"`
+					ResetType          int         `json:"resetType"`
+					StatModifierUsesID interface{} `json:"statModifierUsesId"`
+					Operator           int         `json:"operator"`
+					ResetDice          interface{} `json:"resetDice"`
+				} `json:"limitedUse"`
+				Name              string      `json:"name"`
+				NumberOfTargets   interface{} `json:"numberOfTargets"`
+				OnMissDescription string      `json:"onMissDescription"`
+				Range             struct {
+					HasAoeSpecialDescription bool        `json:"hasAoeSpecialDescription"`
+					AoeSize                  interface{} `json:"aoeSize"`
+					AoeType                  interface{} `json:"aoeType"`
+					LongRange                interface{} `json:"longRange"`
+					MinimumRange             interface{} `json:"minimumRange"`
+					Range                    interface{} `json:"range"`
+				} `json:"range"`
+				SaveFailDescription    string      `json:"saveFailDescription"`
+				SaveStatID             interface{} `json:"saveStatId"`
+				SaveSuccessDescription string      `json:"saveSuccessDescription"`
+				Snippet                string      `json:"snippet"`
+				SpellRangeType         interface{} `json:"spellRangeType"`
+				Value                  interface{} `json:"value"`
+				Ammunition             interface{} `json:"ammunition"`
+			} `json:"class"`
+			Feat []interface{} `json:"feat"`
+			Item interface{}   `json:"item"`
+			Race []interface{} `json:"race"`
+		} `json:"actions"`
 		Modifiers struct {
-			*js.Object
-
-			Race []struct {
-				*js.Object
-
-				ID                  string        `json:"id" js:"id"`
-				EntityID            int           `json:"entityId" js:"entityId"`
-				EntityTypeID        int           `json:"entityTypeId" js:"entityTypeId"`
-				Type                string        `json:"type" js:"type"`
-				SubType             string        `json:"subType" js:"subType"`
-				Dice                interface{}   `json:"dice" js:"dice"`
-				Restriction         string        `json:"restriction" js:"restriction"`
-				StatID              interface{}   `json:"statId" js:"statId"`
-				RequiresAttunement  bool          `json:"requiresAttunement" js:"requiresAttunement"`
-				Duration            interface{}   `json:"duration" js:"duration"`
-				FriendlyTypeName    string        `json:"friendlyTypeName" js:"friendlyTypeName"`
-				FriendlySubtypeName string        `json:"friendlySubtypeName" js:"friendlySubtypeName"`
-				IsGranted           bool          `json:"isGranted" js:"isGranted"`
-				BonusTypes          []interface{} `json:"bonusTypes" js:"bonusTypes"`
-				Value               int           `json:"value" js:"value"`
-				ComponentID         int           `json:"componentId" js:"componentId"`
-				ComponentTypeID     int           `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"race" js:"race"`
-			Class []struct {
-				*js.Object
-
-				ID                  string        `json:"id" js:"id"`
-				EntityID            int           `json:"entityId" js:"entityId"`
-				EntityTypeID        int           `json:"entityTypeId" js:"entityTypeId"`
-				Type                string        `json:"type" js:"type"`
-				SubType             string        `json:"subType" js:"subType"`
-				Dice                interface{}   `json:"dice" js:"dice"`
-				Restriction         string        `json:"restriction" js:"restriction"`
-				StatID              interface{}   `json:"statId" js:"statId"`
-				RequiresAttunement  bool          `json:"requiresAttunement" js:"requiresAttunement"`
-				Duration            interface{}   `json:"duration" js:"duration"`
-				FriendlyTypeName    string        `json:"friendlyTypeName" js:"friendlyTypeName"`
-				FriendlySubtypeName string        `json:"friendlySubtypeName" js:"friendlySubtypeName"`
-				IsGranted           bool          `json:"isGranted" js:"isGranted"`
-				BonusTypes          []interface{} `json:"bonusTypes" js:"bonusTypes"`
-				Value               interface{}   `json:"value" js:"value"`
-				ComponentID         int           `json:"componentId" js:"componentId"`
-				ComponentTypeID     int           `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"class" js:"class"`
 			Background []struct {
-				*js.Object
-
-				ID                  string        `json:"id" js:"id"`
-				EntityID            int           `json:"entityId" js:"entityId"`
-				EntityTypeID        int           `json:"entityTypeId" js:"entityTypeId"`
-				Type                string        `json:"type" js:"type"`
-				SubType             string        `json:"subType" js:"subType"`
-				Dice                interface{}   `json:"dice" js:"dice"`
-				Restriction         string        `json:"restriction" js:"restriction"`
-				StatID              interface{}   `json:"statId" js:"statId"`
-				RequiresAttunement  bool          `json:"requiresAttunement" js:"requiresAttunement"`
-				Duration            interface{}   `json:"duration" js:"duration"`
-				FriendlyTypeName    string        `json:"friendlyTypeName" js:"friendlyTypeName"`
-				FriendlySubtypeName string        `json:"friendlySubtypeName" js:"friendlySubtypeName"`
-				IsGranted           bool          `json:"isGranted" js:"isGranted"`
-				BonusTypes          []interface{} `json:"bonusTypes" js:"bonusTypes"`
-				Value               interface{}   `json:"value" js:"value"`
-				ComponentID         int           `json:"componentId" js:"componentId"`
-				ComponentTypeID     int           `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"background" js:"background"`
-			Item      []interface{} `json:"item" js:"item"`
-			Feat      []interface{} `json:"feat" js:"feat"`
-			Condition []interface{} `json:"condition" js:"condition"`
-		} `json:"modifiers" js:"modifiers"`
+				AvailableToMulticlass bool          `json:"availableToMulticlass"`
+				BonusTypes            []interface{} `json:"bonusTypes"`
+				Dice                  interface{}   `json:"dice"`
+				Duration              interface{}   `json:"duration"`
+				EntityID              int           `json:"entityId"`
+				EntityTypeID          int           `json:"entityTypeId"`
+				FixedValue            interface{}   `json:"fixedValue"`
+				FriendlySubtypeName   string        `json:"friendlySubtypeName"`
+				FriendlyTypeName      string        `json:"friendlyTypeName"`
+				ID                    string        `json:"id"`
+				IsGranted             bool          `json:"isGranted"`
+				ModifierSubTypeID     int           `json:"modifierSubTypeId"`
+				ModifierTypeID        int           `json:"modifierTypeId"`
+				RequiresAttunement    bool          `json:"requiresAttunement"`
+				Restriction           string        `json:"restriction"`
+				StatID                interface{}   `json:"statId"`
+				SubType               string        `json:"subType"`
+				Type                  string        `json:"type"`
+				Value                 interface{}   `json:"value"`
+				ComponentID           int           `json:"componentId"`
+				ComponentTypeID       int           `json:"componentTypeId"`
+			} `json:"background"`
+			Class []struct {
+				AvailableToMulticlass bool          `json:"availableToMulticlass"`
+				BonusTypes            []interface{} `json:"bonusTypes"`
+				Dice                  interface{}   `json:"dice"`
+				Duration              interface{}   `json:"duration"`
+				EntityID              interface{}   `json:"entityId"`
+				EntityTypeID          interface{}   `json:"entityTypeId"`
+				FixedValue            interface{}   `json:"fixedValue"`
+				FriendlySubtypeName   string        `json:"friendlySubtypeName"`
+				FriendlyTypeName      string        `json:"friendlyTypeName"`
+				ID                    string        `json:"id"`
+				IsGranted             bool          `json:"isGranted"`
+				ModifierSubTypeID     int           `json:"modifierSubTypeId"`
+				ModifierTypeID        int           `json:"modifierTypeId"`
+				RequiresAttunement    bool          `json:"requiresAttunement"`
+				Restriction           string        `json:"restriction"`
+				StatID                interface{}   `json:"statId"`
+				SubType               string        `json:"subType"`
+				Type                  string        `json:"type"`
+				Value                 interface{}   `json:"value"`
+				ComponentID           int           `json:"componentId"`
+				ComponentTypeID       int           `json:"componentTypeId"`
+			} `json:"class"`
+			Condition []interface{} `json:"condition"`
+			Feat      []interface{} `json:"feat"`
+			Item      []interface{} `json:"item"`
+			Race      []struct {
+				AvailableToMulticlass bool          `json:"availableToMulticlass"`
+				BonusTypes            []interface{} `json:"bonusTypes"`
+				Dice                  interface{}   `json:"dice"`
+				Duration              interface{}   `json:"duration"`
+				EntityID              int           `json:"entityId"`
+				EntityTypeID          int           `json:"entityTypeId"`
+				FixedValue            int           `json:"fixedValue"`
+				FriendlySubtypeName   string        `json:"friendlySubtypeName"`
+				FriendlyTypeName      string        `json:"friendlyTypeName"`
+				ID                    string        `json:"id"`
+				IsGranted             bool          `json:"isGranted"`
+				ModifierSubTypeID     int           `json:"modifierSubTypeId"`
+				ModifierTypeID        int           `json:"modifierTypeId"`
+				RequiresAttunement    bool          `json:"requiresAttunement"`
+				Restriction           string        `json:"restriction"`
+				StatID                interface{}   `json:"statId"`
+				SubType               string        `json:"subType"`
+				Type                  string        `json:"type"`
+				Value                 int           `json:"value"`
+				ComponentID           int           `json:"componentId"`
+				ComponentTypeID       int           `json:"componentTypeId"`
+			} `json:"race"`
+		} `json:"modifiers"`
 		ClassSpells []struct {
-			*js.Object
-
-			EntityTypeID     int `json:"entityTypeId" js:"entityTypeId"`
-			CharacterClassID int `json:"characterClassId" js:"characterClassId"`
+			CharacterClassID int `json:"characterClassId"`
+			EntityTypeID     int `json:"entityTypeId"`
 			Spells           []struct {
-				*js.Object
-
-				ID           int `json:"id" js:"id"`
-				EntityTypeID int `json:"entityTypeId" js:"entityTypeId"`
-				Definition   struct {
-					*js.Object
-
-					ID       int    `json:"id" js:"id"`
-					Name     string `json:"name" js:"name"`
-					Level    int    `json:"level" js:"level"`
-					School   string `json:"school" js:"school"`
-					Duration struct {
-						*js.Object
-
-						DurationInterval int    `json:"durationInterval" js:"durationInterval"`
-						DurationUnit     string `json:"durationUnit" js:"durationUnit"`
-						DurationType     string `json:"durationType" js:"durationType"`
-					} `json:"duration" js:"duration"`
-					Activation struct {
-						*js.Object
-
-						ActivationTime int `json:"activationTime" js:"activationTime"`
-						ActivationType int `json:"activationType" js:"activationType"`
-					} `json:"activation" js:"activation"`
-					Range struct {
-						*js.Object
-
-						Origin     string `json:"origin" js:"origin"`
-						RangeValue int    `json:"rangeValue" js:"rangeValue"`
-						AoeType    string `json:"aoeType" js:"aoeType"`
-						AoeValue   int    `json:"aoeValue" js:"aoeValue"`
-					} `json:"range" js:"range"`
-					AsPartOfWeaponAttack  bool        `json:"asPartOfWeaponAttack" js:"asPartOfWeaponAttack"`
-					Description           string      `json:"description" js:"description"`
-					Snippet               string      `json:"snippet" js:"snippet"`
-					Concentration         bool        `json:"concentration" js:"concentration"`
-					Ritual                bool        `json:"ritual" js:"ritual"`
-					RangeArea             interface{} `json:"rangeArea" js:"rangeArea"`
-					DamageEffect          interface{} `json:"damageEffect" js:"damageEffect"`
-					Components            []int       `json:"components" js:"components"`
-					ComponentsDescription string      `json:"componentsDescription" js:"componentsDescription"`
-					SaveDcAbilityID       interface{} `json:"saveDcAbilityId" js:"saveDcAbilityId"`
-					Healing               interface{} `json:"healing" js:"healing"`
-					HealingDice           interface{} `json:"healingDice" js:"healingDice"`
-					TempHpDice            interface{} `json:"tempHpDice" js:"tempHpDice"`
-					AttackType            int         `json:"attackType" js:"attackType"`
-					CanCastAtHigherLevel  bool        `json:"canCastAtHigherLevel" js:"canCastAtHigherLevel"`
-					IsHomebrew            bool        `json:"isHomebrew" js:"isHomebrew"`
-					Version               interface{} `json:"version" js:"version"`
-					SourceID              int         `json:"sourceId" js:"sourceId"`
-					SourcePageNumber      int         `json:"sourcePageNumber" js:"sourcePageNumber"`
-					RequiresSavingThrow   bool        `json:"requiresSavingThrow" js:"requiresSavingThrow"`
-					RequiresAttackRoll    bool        `json:"requiresAttackRoll" js:"requiresAttackRoll"`
-					AtHigherLevels        struct {
-						*js.Object
-
-						ScaleType              string        `json:"scaleType" js:"scaleType"`
-						HigherLevelDefinitions []interface{} `json:"higherLevelDefinitions" js:"higherLevelDefinitions"`
-						AdditionalAttacks      []interface{} `json:"additionalAttacks" js:"additionalAttacks"`
-						AdditionalTargets      []interface{} `json:"additionalTargets" js:"additionalTargets"`
-						AreaOfEffect           []interface{} `json:"areaOfEffect" js:"areaOfEffect"`
-						Duration               []interface{} `json:"duration" js:"duration"`
-						Creatures              []interface{} `json:"creatures" js:"creatures"`
-						Special                []interface{} `json:"special" js:"special"`
-						Points                 []interface{} `json:"points" js:"points"`
-					} `json:"atHigherLevels" js:"atHigherLevels"`
-					Modifiers []struct {
-						*js.Object
-
-						ID      string `json:"id" js:"id"`
-						Type    string `json:"type" js:"type"`
-						SubType string `json:"subType" js:"subType"`
-						Die     struct {
-							*js.Object
-
-							DiceCount      int         `json:"diceCount" js:"diceCount"`
-							DiceValue      int         `json:"diceValue" js:"diceValue"`
-							DiceMultiplier interface{} `json:"diceMultiplier" js:"diceMultiplier"`
-							FixedValue     int         `json:"fixedValue" js:"fixedValue"`
-							DiceString     string      `json:"diceString" js:"diceString"`
-						} `json:"die" js:"die"`
-						Count               int         `json:"count" js:"count"`
-						Duration            int         `json:"duration" js:"duration"`
-						DurationUnit        interface{} `json:"durationUnit" js:"durationUnit"`
-						Restriction         string      `json:"restriction" js:"restriction"`
-						FriendlyTypeName    string      `json:"friendlyTypeName" js:"friendlyTypeName"`
-						FriendlySubtypeName string      `json:"friendlySubtypeName" js:"friendlySubtypeName"`
-						UsePrimaryStat      bool        `json:"usePrimaryStat" js:"usePrimaryStat"`
-						AtHigherLevels      struct {
-							*js.Object
-
-							ScaleType              string `json:"scaleType" js:"scaleType"`
-							HigherLevelDefinitions []struct {
-								*js.Object
-
-								Level  int `json:"level" js:"level"`
-								TypeID int `json:"typeId" js:"typeId"`
-								Dice   struct {
-									*js.Object
-
-									DiceCount      int         `json:"diceCount" js:"diceCount"`
-									DiceValue      int         `json:"diceValue" js:"diceValue"`
-									DiceMultiplier interface{} `json:"diceMultiplier" js:"diceMultiplier"`
-									FixedValue     int         `json:"fixedValue" js:"fixedValue"`
-									DiceString     string      `json:"diceString" js:"diceString"`
-								} `json:"dice" js:"dice"`
-								Value   interface{} `json:"value" js:"value"`
-								Details string      `json:"details" js:"details"`
-							} `json:"higherLevelDefinitions" js:"higherLevelDefinitions"`
-							AdditionalAttacks []interface{} `json:"additionalAttacks" js:"additionalAttacks"`
-							AdditionalTargets []interface{} `json:"additionalTargets" js:"additionalTargets"`
-							AreaOfEffect      []interface{} `json:"areaOfEffect" js:"areaOfEffect"`
-							Duration          []interface{} `json:"duration" js:"duration"`
-							Creatures         []interface{} `json:"creatures" js:"creatures"`
-							Special           []interface{} `json:"special" js:"special"`
-							Points            []struct {
-								*js.Object
-
-								Die struct {
-									*js.Object
-
-									DiceCount      int         `json:"diceCount" js:"diceCount"`
-									DiceValue      int         `json:"diceValue" js:"diceValue"`
-									DiceMultiplier interface{} `json:"diceMultiplier" js:"diceMultiplier"`
-									FixedValue     int         `json:"fixedValue" js:"fixedValue"`
-									DiceString     string      `json:"diceString" js:"diceString"`
-								} `json:"die" js:"die"`
-								Level       int    `json:"level" js:"level"`
-								Description string `json:"description" js:"description"`
-							} `json:"points" js:"points"`
-						} `json:"atHigherLevels" js:"atHigherLevels"`
-					} `json:"modifiers" js:"modifiers"`
-					Conditions             []interface{} `json:"conditions" js:"conditions"`
-					Tags                   []string      `json:"tags" js:"tags"`
-					CastingTimeDescription string        `json:"castingTimeDescription" js:"castingTimeDescription"`
-				} `json:"definition" js:"definition"`
-				Prepared              bool        `json:"prepared" js:"prepared"`
-				CountsAsKnownSpell    bool        `json:"countsAsKnownSpell" js:"countsAsKnownSpell"`
-				UsesSpellSlot         bool        `json:"usesSpellSlot" js:"usesSpellSlot"`
-				CastAtLevel           interface{} `json:"castAtLevel" js:"castAtLevel"`
-				AlwaysPrepared        bool        `json:"alwaysPrepared" js:"alwaysPrepared"`
-				Restriction           interface{} `json:"restriction" js:"restriction"`
-				SpellCastingAbilityID interface{} `json:"spellCastingAbilityId" js:"spellCastingAbilityId"`
-				DisplayAsAttack       interface{} `json:"displayAsAttack" js:"displayAsAttack"`
-				AdditionalDescription interface{} `json:"additionalDescription" js:"additionalDescription"`
-				CastOnlyAsRitual      bool        `json:"castOnlyAsRitual" js:"castOnlyAsRitual"`
-				RitualCastingType     interface{} `json:"ritualCastingType" js:"ritualCastingType"`
-				Range                 struct {
-					*js.Object
-
-					Origin     string      `json:"origin" js:"origin"`
-					RangeValue int         `json:"rangeValue" js:"rangeValue"`
-					AoeType    interface{} `json:"aoeType" js:"aoeType"`
-					AoeValue   interface{} `json:"aoeValue" js:"aoeValue"`
-				} `json:"range" js:"range"`
 				Activation struct {
-					*js.Object
-
-					ActivationTime int `json:"activationTime" js:"activationTime"`
-					ActivationType int `json:"activationType" js:"activationType"`
-				} `json:"activation" js:"activation"`
-				BaseLevelAtWill       bool        `json:"baseLevelAtWill" js:"baseLevelAtWill"`
-				AtWillLimitedUseLevel interface{} `json:"atWillLimitedUseLevel" js:"atWillLimitedUseLevel"`
-				ComponentID           int         `json:"componentId" js:"componentId"`
-				ComponentTypeID       int         `json:"componentTypeId" js:"componentTypeId"`
-			} `json:"spells" js:"spells"`
-		} `json:"classSpells" js:"classSpells"`
-		CustomItems []interface{} `json:"customItems" js:"customItems"`
-		Campaign    interface{}   `json:"campaign" js:"campaign"`
+					ActivationTime int `json:"activationTime"`
+					ActivationType int `json:"activationType"`
+				} `json:"activation"`
+				AdditionalDescription interface{} `json:"additionalDescription"`
+				AlwaysPrepared        bool        `json:"alwaysPrepared"`
+				AtWillLimitedUseLevel interface{} `json:"atWillLimitedUseLevel"`
+				BaseLevelAtWill       bool        `json:"baseLevelAtWill"`
+				CastAtLevel           interface{} `json:"castAtLevel"`
+				CastOnlyAsRitual      bool        `json:"castOnlyAsRitual"`
+				ComponentID           int         `json:"componentId"`
+				ComponentTypeID       int         `json:"componentTypeId"`
+				CountsAsKnownSpell    bool        `json:"countsAsKnownSpell"`
+				Definition            struct {
+					Activation struct {
+						ActivationTime int `json:"activationTime"`
+						ActivationType int `json:"activationType"`
+					} `json:"activation"`
+					AsPartOfWeaponAttack bool `json:"asPartOfWeaponAttack"`
+					AtHigherLevels       struct {
+						AdditionalAttacks      []interface{} `json:"additionalAttacks"`
+						AdditionalTargets      []interface{} `json:"additionalTargets"`
+						AreaOfEffect           []interface{} `json:"areaOfEffect"`
+						Creatures              []interface{} `json:"creatures"`
+						Duration               []interface{} `json:"duration"`
+						HigherLevelDefinitions []interface{} `json:"higherLevelDefinitions"`
+						Points                 []interface{} `json:"points"`
+						ScaleType              string        `json:"scaleType"`
+						Special                []interface{} `json:"special"`
+					} `json:"atHigherLevels"`
+					AttackType             int           `json:"attackType"`
+					CanCastAtHigherLevel   bool          `json:"canCastAtHigherLevel"`
+					CastingTimeDescription string        `json:"castingTimeDescription"`
+					Components             []int         `json:"components"`
+					ComponentsDescription  string        `json:"componentsDescription"`
+					Concentration          bool          `json:"concentration"`
+					Conditions             []interface{} `json:"conditions"`
+					DamageEffect           interface{}   `json:"damageEffect"`
+					Description            string        `json:"description"`
+					Duration               struct {
+						DurationInterval int    `json:"durationInterval"`
+						DurationUnit     string `json:"durationUnit"`
+						DurationType     string `json:"durationType"`
+					} `json:"duration"`
+					Healing     interface{}   `json:"healing"`
+					HealingDice []interface{} `json:"healingDice"`
+					ID          int           `json:"id"`
+					IsHomebrew  bool          `json:"isHomebrew"`
+					Level       int           `json:"level"`
+					Modifiers   []struct {
+						AtHigherLevels struct {
+							AdditionalAttacks      []interface{} `json:"additionalAttacks"`
+							AdditionalTargets      []interface{} `json:"additionalTargets"`
+							AreaOfEffect           []interface{} `json:"areaOfEffect"`
+							Creatures              []interface{} `json:"creatures"`
+							Duration               []interface{} `json:"duration"`
+							HigherLevelDefinitions []struct {
+								Details string `json:"details"`
+								Dice    struct {
+									DiceCount      int         `json:"diceCount"`
+									DiceMultiplier interface{} `json:"diceMultiplier"`
+									DiceString     string      `json:"diceString"`
+									DiceValue      int         `json:"diceValue"`
+									FixedValue     int         `json:"fixedValue"`
+								} `json:"dice"`
+								Level  int         `json:"level"`
+								TypeID int         `json:"typeId"`
+								Value  interface{} `json:"value"`
+							} `json:"higherLevelDefinitions"`
+							Points    []interface{} `json:"points"`
+							ScaleType string        `json:"scaleType"`
+							Special   []interface{} `json:"special"`
+						} `json:"atHigherLevels"`
+						Count int `json:"count"`
+						Die   struct {
+							DiceCount      int         `json:"diceCount"`
+							DiceMultiplier interface{} `json:"diceMultiplier"`
+							DiceString     string      `json:"diceString"`
+							DiceValue      int         `json:"diceValue"`
+							FixedValue     int         `json:"fixedValue"`
+						} `json:"die"`
+						DurationUnit          interface{}   `json:"durationUnit"`
+						UsePrimaryStat        bool          `json:"usePrimaryStat"`
+						AvailableToMulticlass interface{}   `json:"availableToMulticlass"`
+						BonusTypes            []interface{} `json:"bonusTypes"`
+						Dice                  interface{}   `json:"dice"`
+						Duration              interface{}   `json:"duration"`
+						EntityID              interface{}   `json:"entityId"`
+						EntityTypeID          interface{}   `json:"entityTypeId"`
+						FixedValue            interface{}   `json:"fixedValue"`
+						FriendlySubtypeName   string        `json:"friendlySubtypeName"`
+						FriendlyTypeName      string        `json:"friendlyTypeName"`
+						ID                    string        `json:"id"`
+						IsGranted             bool          `json:"isGranted"`
+						ModifierSubTypeID     int           `json:"modifierSubTypeId"`
+						ModifierTypeID        int           `json:"modifierTypeId"`
+						RequiresAttunement    bool          `json:"requiresAttunement"`
+						Restriction           string        `json:"restriction"`
+						StatID                interface{}   `json:"statId"`
+						SubType               string        `json:"subType"`
+						Type                  string        `json:"type"`
+						Value                 interface{}   `json:"value"`
+						ComponentID           int           `json:"componentId"`
+						ComponentTypeID       int           `json:"componentTypeId"`
+					} `json:"modifiers"`
+					Name  string `json:"name"`
+					Range struct {
+						AoeType    string `json:"aoeType"`
+						AoeValue   int    `json:"aoeValue"`
+						Origin     string `json:"origin"`
+						RangeValue int    `json:"rangeValue"`
+					} `json:"range"`
+					RangeArea           interface{}   `json:"rangeArea"`
+					RequiresAttackRoll  bool          `json:"requiresAttackRoll"`
+					RequiresSavingThrow bool          `json:"requiresSavingThrow"`
+					Ritual              bool          `json:"ritual"`
+					SaveDcAbilityID     interface{}   `json:"saveDcAbilityId"`
+					School              string        `json:"school"`
+					Snippet             string        `json:"snippet"`
+					SourceID            interface{}   `json:"sourceId"`
+					SourcePageNumber    int           `json:"sourcePageNumber"`
+					Tags                []string      `json:"tags"`
+					TempHpDice          []interface{} `json:"tempHpDice"`
+					Version             interface{}   `json:"version"`
+					Sources             []struct {
+						SourceID   int         `json:"sourceId"`
+						PageNumber interface{} `json:"pageNumber"`
+						SourceType int         `json:"sourceType"`
+					} `json:"sources"`
+					ScaleType string `json:"scaleType"`
+				} `json:"definition"`
+				DefinitionID     int         `json:"definitionId"`
+				DisplayAsAttack  interface{} `json:"displayAsAttack"`
+				EntityTypeID     int         `json:"entityTypeId"`
+				ID               int         `json:"id"`
+				IsSignatureSpell interface{} `json:"isSignatureSpell"`
+				LimitedUse       interface{} `json:"limitedUse"`
+				OverrideSaveDc   interface{} `json:"overrideSaveDc"`
+				Prepared         bool        `json:"prepared"`
+				Range            struct {
+					AoeType    interface{} `json:"aoeType"`
+					AoeValue   interface{} `json:"aoeValue"`
+					Origin     string      `json:"origin"`
+					RangeValue int         `json:"rangeValue"`
+				} `json:"range"`
+				Restriction           interface{} `json:"restriction"`
+				RitualCastingType     interface{} `json:"ritualCastingType"`
+				SpellCastingAbilityID interface{} `json:"spellCastingAbilityId"`
+				UsesSpellSlot         bool        `json:"usesSpellSlot"`
+				SpellListID           interface{} `json:"spellListId"`
+			} `json:"spells"`
+		} `json:"classSpells"`
+		CustomItems []interface{} `json:"customItems"`
+		Campaign    interface{}   `json:"campaign"`
 		Creatures   []struct {
-			*js.Object
-
-			ID                 int         `json:"id" js:"id"`
-			EntityTypeID       int         `json:"entityTypeId" js:"entityTypeId"`
-			Name               string      `json:"name" js:"name"`
-			Description        interface{} `json:"description" js:"description"`
-			IsActive           bool        `json:"isActive" js:"isActive"`
-			RemovedHitPoints   int         `json:"removedHitPoints" js:"removedHitPoints"`
-			TemporaryHitPoints interface{} `json:"temporaryHitPoints" js:"temporaryHitPoints"`
-			GroupID            int         `json:"groupId" js:"groupId"`
+			ID                 int         `json:"id"`
+			EntityTypeID       int         `json:"entityTypeId"`
+			Name               string      `json:"name"`
+			Description        interface{} `json:"description"`
+			IsActive           bool        `json:"isActive"`
+			RemovedHitPoints   int         `json:"removedHitPoints"`
+			TemporaryHitPoints interface{} `json:"temporaryHitPoints"`
+			GroupID            int         `json:"groupId"`
 			Definition         struct {
-				*js.Object
-
-				Stats []struct {
-					*js.Object
-
-					StatID int         `json:"statId" js:"statId"`
-					Name   interface{} `json:"name" js:"name"`
-					Value  int         `json:"value" js:"value"`
-				} `json:"stats" js:"stats"`
-				Senses []struct {
-					*js.Object
-
-					SenseID int    `json:"senseId" js:"senseId"`
-					Notes   string `json:"notes" js:"notes"`
-				} `json:"senses" js:"senses"`
-				DamageAdjustments   []interface{} `json:"damageAdjustments" js:"damageAdjustments"`
-				ConditionImmunities []interface{} `json:"conditionImmunities" js:"conditionImmunities"`
-				SavingThrows        []struct {
-					*js.Object
-
-					StatID        int         `json:"statId" js:"statId"`
-					BonusModifier interface{} `json:"bonusModifier" js:"bonusModifier"`
-				} `json:"savingThrows" js:"savingThrows"`
-				Skills []struct {
-					*js.Object
-
-					SkillID         int `json:"skillId" js:"skillId"`
-					Value           int `json:"value" js:"value"`
-					AdditionalBonus int `json:"additionalBonus" js:"additionalBonus"`
-				} `json:"skills" js:"skills"`
-				Languages []struct {
-					*js.Object
-
-					LanguageID int    `json:"languageId" js:"languageId"`
-					Notes      string `json:"notes" js:"notes"`
-				} `json:"languages" js:"languages"`
-				SpecialTraitsDescription    string `json:"specialTraitsDescription" js:"specialTraitsDescription"`
-				ActionsDescription          string `json:"actionsDescription" js:"actionsDescription"`
-				ReactionsDescription        string `json:"reactionsDescription" js:"reactionsDescription"`
-				LegendaryActionsDescription string `json:"legendaryActionsDescription" js:"legendaryActionsDescription"`
-				CharacteristicsDescription  string `json:"characteristicsDescription" js:"characteristicsDescription"`
-				LairDescription             string `json:"lairDescription" js:"lairDescription"`
-				LanguageDescription         string `json:"languageDescription" js:"languageDescription"`
-				LanguageNote                string `json:"languageNote" js:"languageNote"`
-				ID                          int    `json:"id" js:"id"`
-				EntityTypeID                int    `json:"entityTypeId" js:"entityTypeId"`
-				Name                        string `json:"name" js:"name"`
-				AlignmentID                 int    `json:"alignmentId" js:"alignmentId"`
-				SizeID                      int    `json:"sizeId" js:"sizeId"`
-				TypeID                      int    `json:"typeId" js:"typeId"`
-				ArmorClass                  int    `json:"armorClass" js:"armorClass"`
-				ArmorClassDescription       string `json:"armorClassDescription" js:"armorClassDescription"`
-				AverageHitPoints            int    `json:"averageHitPoints" js:"averageHitPoints"`
-				HitPointDice                struct {
-					*js.Object
-
-					DiceCount      int         `json:"diceCount" js:"diceCount"`
-					DiceValue      int         `json:"diceValue" js:"diceValue"`
-					DiceMultiplier interface{} `json:"diceMultiplier" js:"diceMultiplier"`
-					FixedValue     int         `json:"fixedValue" js:"fixedValue"`
-					DiceString     string      `json:"diceString" js:"diceString"`
-				} `json:"hitPointDice" js:"hitPointDice"`
+				ID                    int    `json:"id"`
+				EntityTypeID          int    `json:"entityTypeId"`
+				Name                  string `json:"name"`
+				AlignmentID           int    `json:"alignmentId"`
+				SizeID                int    `json:"sizeId"`
+				TypeID                int    `json:"typeId"`
+				ArmorClass            int    `json:"armorClass"`
+				ArmorClassDescription string `json:"armorClassDescription"`
+				AverageHitPoints      int    `json:"averageHitPoints"`
+				HitPointDice          struct {
+					DiceCount      int         `json:"diceCount"`
+					DiceMultiplier interface{} `json:"diceMultiplier"`
+					DiceString     string      `json:"diceString"`
+					DiceValue      int         `json:"diceValue"`
+					FixedValue     int         `json:"fixedValue"`
+				} `json:"hitPointDice"`
 				Movements []struct {
-					*js.Object
-
-					MovementID int    `json:"movementId" js:"movementId"`
-					Speed      int    `json:"speed" js:"speed"`
-					Notes      string `json:"notes" js:"notes"`
-				} `json:"movements" js:"movements"`
-				PassivePerception int           `json:"passivePerception" js:"passivePerception"`
-				IsHomebrew        bool          `json:"isHomebrew" js:"isHomebrew"`
-				ChallengeRatingID int           `json:"challengeRatingId" js:"challengeRatingId"`
-				SourceID          int           `json:"sourceId" js:"sourceId"`
-				SourcePageNumber  int           `json:"sourcePageNumber" js:"sourcePageNumber"`
-				IsLegendary       bool          `json:"isLegendary" js:"isLegendary"`
-				HasLair           bool          `json:"hasLair" js:"hasLair"`
-				AvatarURL         string        `json:"avatarUrl" js:"avatarUrl"`
-				LargeAvatarURL    string        `json:"largeAvatarUrl" js:"largeAvatarUrl"`
-				BasicAvatarURL    string        `json:"basicAvatarUrl" js:"basicAvatarUrl"`
-				Version           interface{}   `json:"version" js:"version"`
-				Swarm             interface{}   `json:"swarm" js:"swarm"`
-				SubTypes          []interface{} `json:"subTypes" js:"subTypes"`
-				Environments      []int         `json:"environments" js:"environments"`
-				Tags              []interface{} `json:"tags" js:"tags"`
-			} `json:"definition" js:"definition"`
-		} `json:"creatures" js:"creatures"`
-		Vehicles   []interface{} `json:"vehicles" js:"vehicles"`
-		Components []interface{} `json:"components" js:"components"`
-	} `json:"character" js:"character"`
+					MovementID int    `json:"movementId"`
+					Speed      int    `json:"speed"`
+					Notes      string `json:"notes"`
+				} `json:"movements"`
+				PassivePerception int           `json:"passivePerception"`
+				IsHomebrew        bool          `json:"isHomebrew"`
+				ChallengeRatingID int           `json:"challengeRatingId"`
+				SourceID          int           `json:"sourceId"`
+				SourcePageNumber  int           `json:"sourcePageNumber"`
+				IsLegendary       bool          `json:"isLegendary"`
+				HasLair           bool          `json:"hasLair"`
+				AvatarURL         string        `json:"avatarUrl"`
+				LargeAvatarURL    string        `json:"largeAvatarUrl"`
+				BasicAvatarURL    string        `json:"basicAvatarUrl"`
+				Version           interface{}   `json:"version"`
+				Swarm             interface{}   `json:"swarm"`
+				SubTypes          []interface{} `json:"subTypes"`
+				Environments      []int         `json:"environments"`
+				Tags              []interface{} `json:"tags"`
+				Sources           []struct {
+					SourceID   int         `json:"sourceId"`
+					PageNumber interface{} `json:"pageNumber"`
+					SourceType int         `json:"sourceType"`
+				} `json:"sources"`
+				Stats []struct {
+					StatID int         `json:"statId"`
+					Name   interface{} `json:"name"`
+					Value  int         `json:"value"`
+				} `json:"stats"`
+				Senses []struct {
+					SenseID int    `json:"senseId"`
+					Notes   string `json:"notes"`
+				} `json:"senses"`
+				DamageAdjustments   []interface{} `json:"damageAdjustments"`
+				ConditionImmunities []interface{} `json:"conditionImmunities"`
+				SavingThrows        []struct {
+					StatID        int         `json:"statId"`
+					BonusModifier interface{} `json:"bonusModifier"`
+				} `json:"savingThrows"`
+				Skills []struct {
+					SkillID         int `json:"skillId"`
+					Value           int `json:"value"`
+					AdditionalBonus int `json:"additionalBonus"`
+				} `json:"skills"`
+				Languages []struct {
+					LanguageID int    `json:"languageId"`
+					Notes      string `json:"notes"`
+				} `json:"languages"`
+				SpecialTraitsDescription    string `json:"specialTraitsDescription"`
+				ActionsDescription          string `json:"actionsDescription"`
+				ReactionsDescription        string `json:"reactionsDescription"`
+				LegendaryActionsDescription string `json:"legendaryActionsDescription"`
+				CharacteristicsDescription  string `json:"characteristicsDescription"`
+				LairDescription             string `json:"lairDescription"`
+				LanguageDescription         string `json:"languageDescription"`
+				LanguageNote                string `json:"languageNote"`
+			} `json:"definition"`
+		} `json:"creatures"`
+		OptionalOrigins       []interface{} `json:"optionalOrigins"`
+		OptionalClassFeatures []interface{} `json:"optionalClassFeatures"`
+	} `json:"data"`
+	Pagination interface{} `json:"pagination"`
 }

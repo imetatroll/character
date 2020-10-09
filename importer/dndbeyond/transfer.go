@@ -13,7 +13,7 @@ func (char *Character) Transfer(userID string) *base.Character {
 
 	target := dnd.NewCharacter(userID)
 
-	if char.Character.Inspiration {
+	if char.Data.Inspiration {
 		target.Top.Set("Inspiration", "true", now)
 	} else {
 		target.Top.Set("Inspiration", "false", now)
@@ -22,13 +22,13 @@ func (char *Character) Transfer(userID string) *base.Character {
 	// top
 	// 2do: class dice/count
 	// 2do: save modifiers - if i remember correctly these are actually calculated values
-	target.Top.Set("CharacterName", char.Character.Name, now)
-	target.Top.Set("Race", char.Character.Race.FullName, now) // or BaseName
-	target.Top.Set("Background", char.Character.Background.Definition.Name, now)
-	target.Top.Set("Class", char.Character.Classes[0].Definition.Name, now)
+	target.Top.Set("CharacterName", char.Data.Name, now)
+	target.Top.Set("Race", char.Data.Race.FullName, now) // or BaseName
+	target.Top.Set("Background", char.Data.Background.Definition.Name, now)
+	target.Top.Set("Class", char.Data.Classes[0].Definition.Name, now)
 	target.Top.Set("Alignment", char.GetAlignment(), now)
-	target.Top.Set("XP", strconv.Itoa(char.Character.CurrentXp), now)
-	target.Top.Set("Level", strconv.Itoa(char.Character.Classes[0].Level), now)
+	target.Top.Set("XP", strconv.Itoa(char.Data.CurrentXp), now)
+	target.Top.Set("Level", strconv.Itoa(char.Data.Classes[0].Level), now)
 
 	// abilities
 	target.Top.Set("Strength", char.GetAbility("Strength"), now)
@@ -67,19 +67,19 @@ func (char *Character) Transfer(userID string) *base.Character {
 	target.Top.Set("SurvivalCheck", char.GetProficiency("Survival"), now)
 
 	// bio
-	target.Bio.Set("Personality", char.Character.Traits.PersonalityTraits, now)
-	target.Bio.Set("Ideals", char.Character.Traits.Ideals, now)
-	target.Bio.Set("Bonds", char.Character.Traits.Bonds, now)
-	target.Bio.Set("Flaws", char.Character.Traits.Flaws, now)
-	target.Bio.Set("Features", char.Character.Traits.Appearance, now)
+	target.Bio.Set("Personality", char.Data.Traits.PersonalityTraits, now)
+	target.Bio.Set("Ideals", char.Data.Traits.Ideals, now)
+	target.Bio.Set("Bonds", char.Data.Traits.Bonds, now)
+	target.Bio.Set("Flaws", char.Data.Traits.Flaws, now)
+	target.Bio.Set("Features", char.Data.Traits.Appearance, now)
 	target.Bio.Set("Notes", char.GetNotes(), now)
 
 	// items
-	target.Items.Set("Copper", strconv.Itoa(char.Character.Currencies.Cp), now)
-	target.Items.Set("Silver", strconv.Itoa(char.Character.Currencies.Sp), now)
-	target.Items.Set("Electrum", strconv.Itoa(char.Character.Currencies.Ep), now)
-	target.Items.Set("Gold", strconv.Itoa(char.Character.Currencies.Gp), now)
-	target.Items.Set("Platinum", strconv.Itoa(char.Character.Currencies.Pp), now)
+	target.Items.Set("Copper", strconv.Itoa(char.Data.Currencies.Cp), now)
+	target.Items.Set("Silver", strconv.Itoa(char.Data.Currencies.Sp), now)
+	target.Items.Set("Electrum", strconv.Itoa(char.Data.Currencies.Ep), now)
+	target.Items.Set("Gold", strconv.Itoa(char.Data.Currencies.Gp), now)
+	target.Items.Set("Platinum", strconv.Itoa(char.Data.Currencies.Pp), now)
 
 	items := char.GetInventory(now)
 	for index, item := range items {
@@ -93,10 +93,10 @@ func (char *Character) Transfer(userID string) *base.Character {
 
 	// HP
 	modifier := (char.GetAbilityInt("Constitution") - 10) / 2
-	maxHP := modifier*char.Character.Classes[0].Level + char.Character.BaseHitPoints
-	target.Combat.Set("CurrentHP", strconv.Itoa(maxHP-char.Character.RemovedHitPoints), now)
+	maxHP := modifier*char.Data.Classes[0].Level + char.Data.BaseHitPoints
+	target.Combat.Set("CurrentHP", strconv.Itoa(maxHP-char.Data.RemovedHitPoints), now)
 	target.Combat.Set("MaxHP", strconv.Itoa(maxHP), now)
-	target.Combat.Set("TemporaryHP", strconv.Itoa(char.Character.TemporaryHitPoints), now)
+	target.Combat.Set("TemporaryHP", strconv.Itoa(char.Data.TemporaryHitPoints), now)
 
 	// weapons
 	weapons := char.GetWeapons(now)

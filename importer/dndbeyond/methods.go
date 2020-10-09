@@ -122,7 +122,7 @@ func SpellActivationType(atype int) string {
 
 func (char *Character) GetInventory(now int64) []dnd.CharacterItem {
 	items := []dnd.CharacterItem{}
-	for index, item := range char.Character.Inventory {
+	for index, item := range char.Data.Inventory {
 		if !IsNonItem(item.Definition.FilterType) {
 			item := dnd.CharacterItem{
 				UUID: base.CharacterField{
@@ -150,7 +150,7 @@ func (char *Character) GetInventory(now int64) []dnd.CharacterItem {
 
 func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
 	weapons := []dnd.CharacterWeapon{}
-	for index, item := range char.Character.Inventory {
+	for index, item := range char.Data.Inventory {
 		if item.Definition.FilterType == "Weapon" {
 			/*
 				Critical         base.CharacterField
@@ -203,7 +203,7 @@ func (char *Character) GetWeapons(now int64) []dnd.CharacterWeapon {
 
 func (char *Character) GetArmor(now int64) []dnd.CharacterArmor {
 	armors := []dnd.CharacterArmor{}
-	for index, item := range char.Character.Inventory {
+	for index, item := range char.Data.Inventory {
 		if item.Definition.FilterType == "Armor" {
 			equipped := "false"
 			if item.Equipped {
@@ -260,7 +260,7 @@ func (char *Character) GetArmor(now int64) []dnd.CharacterArmor {
 // 2do Materials: Components base.CharacterField
 func (char *Character) GetSpells(now int64) []dnd.CharacterSpell {
 	spells := []dnd.CharacterSpell{}
-	for index, item := range char.Character.ClassSpells[0].Spells {
+	for index, item := range char.Data.ClassSpells[0].Spells {
 		prepared := "false"
 		if item.Prepared {
 			prepared = "true"
@@ -370,23 +370,23 @@ func (char *Character) GetSpells(now int64) []dnd.CharacterSpell {
 }
 
 func (char *Character) GetNotes() string {
-	notes := strings.TrimSpace(char.Character.Notes.Organizations)
+	notes := strings.TrimSpace(char.Data.Notes.Organizations)
 	if len(notes) > 0 {
 		notes += "\n\n"
 	}
-	val := strings.TrimSpace(char.Character.Notes.Allies)
+	val := strings.TrimSpace(char.Data.Notes.Allies)
 	if len(val) > 0 {
 		notes += val + "\n\n"
 	}
-	val = strings.TrimSpace(char.Character.Notes.Enemies)
+	val = strings.TrimSpace(char.Data.Notes.Enemies)
 	if len(val) > 0 {
 		notes += val + "\n\n"
 	}
-	val = strings.TrimSpace(char.Character.Notes.Backstory)
+	val = strings.TrimSpace(char.Data.Notes.Backstory)
 	if len(val) > 0 {
 		notes += val + "\n\n"
 	}
-	val = strings.TrimSpace(char.Character.Notes.OtherNotes)
+	val = strings.TrimSpace(char.Data.Notes.OtherNotes)
 	if len(val) > 0 {
 		notes += val + "\n\n"
 	}
@@ -407,7 +407,7 @@ func (char *Character) GetProficiency(name string) string {
 }
 
 func (char *Character) GetRaceProficiency(name string) string {
-	for _, mod := range char.Character.Modifiers.Race {
+	for _, mod := range char.Data.Modifiers.Race {
 		if mod.Type == "proficiency" && mod.FriendlySubtypeName == name {
 			return "true"
 		}
@@ -417,7 +417,7 @@ func (char *Character) GetRaceProficiency(name string) string {
 
 // "suggestedProficiencies": [ "History", "Persuasion" ]
 func (char *Character) GetBackgroundProficiency(name string) string {
-	for _, mod := range char.Character.Modifiers.Background {
+	for _, mod := range char.Data.Modifiers.Background {
 		if mod.Type == "proficiency" && mod.FriendlySubtypeName == name {
 			return "true"
 		}
@@ -428,7 +428,7 @@ func (char *Character) GetBackgroundProficiency(name string) string {
 // EG "friendlySubtypeName": "Persuasion",
 //    "friendlySubtypeName": "Deception",
 func (char *Character) GetClassProficiency(name string) string {
-	for _, mod := range char.Character.Modifiers.Class {
+	for _, mod := range char.Data.Modifiers.Class {
 		if mod.Type == "proficiency" && mod.FriendlySubtypeName == name {
 			return "true"
 		}
@@ -439,7 +439,7 @@ func (char *Character) GetClassProficiency(name string) string {
 // EG "friendlySubtypeName": "Constitution Saving Throws",
 //    "friendlySubtypeName": "Charisma Saving Throws",
 func (char *Character) GetClassSaveProficiency(name string) string {
-	for _, mod := range char.Character.Modifiers.Class {
+	for _, mod := range char.Data.Modifiers.Class {
 		if mod.Type == "proficiency" && mod.FriendlySubtypeName == name+" Saving Throws" {
 			return "true"
 		}
@@ -450,7 +450,7 @@ func (char *Character) GetClassSaveProficiency(name string) string {
 // EG "friendlySubtypeName": "Wisdom Score",
 //    "friendlySubtypeName": "Constitution Score",
 func (char *Character) GetRacialAbilityModifier(id int, name string) int {
-	for _, mod := range char.Character.Modifiers.Race {
+	for _, mod := range char.Data.Modifiers.Race {
 		if mod.Type == "bonus" && mod.FriendlySubtypeName == name+" Score" {
 			return mod.Value
 		}
@@ -475,7 +475,7 @@ func (char *Character) GetAbilityInt(name string) int {
 		id = 6
 	}
 	bonus := char.GetRacialAbilityModifier(id, name)
-	for _, stat := range char.Character.Stats {
+	for _, stat := range char.Data.Stats {
 		if stat.ID == id {
 			return stat.Value + bonus
 		}
@@ -488,7 +488,7 @@ func (char *Character) GetAbility(name string) string {
 }
 
 func (char *Character) GetAlignment() string {
-	switch char.Character.AlignmentID {
+	switch char.Data.AlignmentID {
 	case 1:
 		return "Lawful Good"
 	case 2:
